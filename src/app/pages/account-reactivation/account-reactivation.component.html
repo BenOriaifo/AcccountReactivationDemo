@@ -1,0 +1,1804 @@
+<div class="column col-desc">
+  <div
+    id="back-button"
+    class="cursor"
+    style="padding-left: 20px; padding-top: 5px !important"
+  >
+    <img
+      width="20"
+      style="margin-right: 15px !important"
+      class="back-img"
+      height="20"
+      [routerLink]="['/home']"
+      src="../assets/images/back (2).svg"
+      alt=""
+    />
+    <a style="color: black" [routerLink]="['/home']" for="">Go back</a>
+  </div>
+  <div style="width: 60%; margin: 0 auto; text-align: left">
+    <h1
+      style="
+        font-size: 24px;
+        padding-top: 0px;
+        padding-bottom: 5px;
+        padding-left: 12px;
+      "
+    >
+      Account Reactivation
+    </h1>
+    <div class="ul-class-cont">
+      <div>
+        <div class="active-bg-icon" style="float: left">
+          <img
+            [src]="
+              isAccountStepperActive
+                ? '../../../assets/images/Group774.png'
+                : '../../../assets/images/Group773.png'
+            "
+            height="20"
+            width="20"
+          />
+          <p class="li-icon-seperator"></p>
+        </div>
+        <div class="li-content">
+          <p class="li-subtitle-disabled">Account Validation</p>
+          <!--save session starts here-->
+          <!-- <form style="padding-top: 8px !important;" >
+            
+   
+          
+            <button mat-flat-button class="big-buttonStyles" [ngClass]="{'primary': class=='primary'}"
+              [disabled]="isAwaitingResponse" (click)="proceedToAccountValidation(stepper)">Get started</button>
+   
+              <button mat-flat-button class="big-buttonStyles" [ngClass]="{'primary': class=='primary'}"
+              [disabled]="isAwaitingResponse" (click)="proceedToAccountValidation(stepper)">or continue previous session</button>
+  
+  
+   
+            <div class="float-right">
+            </div>
+          </form> -->
+          <!--Save session ends here-->
+          <p class="li-subcontent-disabled">
+            Fill in your correct Account number and Phone number to validate
+            your account
+          </p>
+        </div>
+      </div>
+      <div>
+        <div class="active-bg-icon" style="float: left">
+          <img
+            *ngIf="!isDetailFormActive && !isDetailFormDone"
+            src="../../../assets/images/Group775.png"
+            height="20"
+            width="20"
+          />
+          <img
+            *ngIf="isDetailFormActive && !isDetailFormDone"
+            src="../../../assets/images/Group774.png"
+            height="20"
+            width="20"
+          />
+          <img
+            *ngIf="!isDetailFormActive && isDetailFormDone"
+            src="../../../assets/images/Group773.png"
+            height="20"
+            width="20"
+          />
+          <p class="li-icon-seperator" style="height: 260px !important"></p>
+        </div>
+        <div class="li-content">
+          <p
+            class="li-subtitle-disabled"
+            [ngClass]="{
+              'disabled-text': !isDetailFormActive && !isDetailFormDone
+            }"
+          >
+            Provide details for account reactivation
+          </p>
+          <p
+            class="li-subcontent-disabled"
+            [ngClass]="{
+              'disabled-text': !isDetailFormActive && !isDetailFormDone
+            }"
+          >
+            You will be required to provide details to reactivate your account,
+            <b>For Personal Account</b>
+            <br />
+            The following is required BVN, Address, Means of Identification file
+            (up to 2mb file size), Utility bill file (up to 2mb file size), and
+            Signature(up to 2mb file size)
+            <br />
+            <b
+              >For Personal Account NOTE: Please note that if captured address
+              is different from address in our records, we will proceed to
+              update your existing address, subject to address verification.</b
+            >
+            <br />
+            <b>For Corporate Account</b>
+            The following is required to be uploaded Board Resolution form (up
+            to 2mb file size), Instruction Letter (up to 2mb file size), and ID
+            Cards of Signatories(up to 2mb file size
+            <br />
+            <b
+              >For Corporate Account NOTE: The Company's business address must
+              be clearly written / captured on the instruction. If address
+              provided on instruction is different from address in our records,
+              we will proceed to update your existing address, subject to
+              address verification.
+            </b>
+          </p>
+        </div>
+
+        <div>
+          <div class="active-bg-icon" style="float: left">
+            <img
+              *ngIf="!isVerifyFormActive && !isVerifyFormDone"
+              src="../../../assets/images/Group775.png"
+              height="20"
+              width="20"
+            />
+            <img
+              *ngIf="isVerifyFormActive && !isVerifyFormDone"
+              src="../../../assets/images/Group774.png"
+              height="20"
+              width="20"
+            />
+            <img
+              *ngIf="!isVerifyFormActive && isVerifyFormDone"
+              src="../../../assets/images/Group773.png"
+              height="20"
+              width="20"
+            />
+
+            <!-- <p class="li-icon-seperator"></p> -->
+          </div>
+          <div class="li-content">
+            <p
+              class="li-subtitle-disabled"
+              [ngClass]="{
+                'disabled-text': !isVerifyFormActive && !isVerifyFormDone
+              }"
+            >
+              Verify OTP
+            </p>
+            <p
+              class="li-subcontent-disabled"
+              [ngClass]="{
+                'disabled-text': !isVerifyFormActive && !isVerifyFormDone
+              }"
+            >
+              A one time password would be sent to your registered device.
+              Please provide the verification pin to complete the request
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="column col-stepper-container">
+  <!-- <h2>Internet Banking Onboarding</h2> -->
+  <a
+    id="back-button-mobile"
+    class="cursor"
+    [routerLink]="['/home']"
+    style="padding-left: 20px; padding-top: 5px !important"
+    ><img
+      width="20"
+      style="margin-right: 15px !important"
+      class="back-img"
+      height="20"
+      src="../assets/images/back (2).svg"
+      alt=""
+    />
+    <label style="color: black" for="">Go back</label>
+  </a>
+  <div class="stepper-container">
+    <h2
+      id="mobileheader"
+      class="header-cls"
+      style="padding-top: 20px; padding-left: 26px"
+      #mobileheader
+    >
+      Account Reactivation
+    </h2>
+
+    <h3 *ngIf="isAccountStepperActive" class="stepper-header">
+      Account Validation
+    </h3>
+
+    <h3 *ngIf="isDetailFormActive" class="stepper-header">
+      Provide details of your account
+    </h3>
+
+    <h3 *ngIf="isVerifyFormActive" class="stepper-header">Verify OTP</h3>
+    <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
+      <mat-step [stepControl]="accountFormGroup">
+        <form
+          style="padding-top: 8px !important"
+          [formGroup]="accountFormGroup"
+        >
+          <ng-template matStepLabel matStepperIcon="">
+            Fill in your details
+          </ng-template>
+
+          <section *ngIf="showSpinner">
+            <mat-progress-bar
+              class="example-margin"
+              [color]="color"
+              [mode]="mode"
+              [value]="value"
+              [bufferValue]="bufferValue"
+            >
+            </mat-progress-bar>
+          </section>
+
+          <h4>Please provide the correct details</h4>
+          <div class="w-100">
+            <mat-form-field class="w-100">
+              <mat-label>Account Number</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                maxlength="10"
+                minlength="10"
+                placeholder="Enter Account Number"
+                formControlName="accountNoCtrl"
+                type="text"
+                required
+              />
+              <mat-hint align="end">Max 10 characters</mat-hint>
+              <mat-error
+                *ngIf="
+                  accountFormGroup.get('accountNoCtrl').hasError('required')
+                "
+              >
+                Account Number is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="w-100">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                maxlength="11"
+                minlength="11"
+                placeholder="Enter Phone Number"
+                formControlName="phoneNoCtrl"
+                required
+              />
+              <mat-hint align="end">Max 11 characters</mat-hint>
+              <mat-error
+                *ngIf="accountFormGroup.get('phoneNoCtrl').hasError('required')"
+              >
+                Phone Number is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- remember to add the ngclass here -->
+          <!-- [ngClass]="{ disabled: isAwaitingResponse }"
+            [disabled]="isAwaitingResponse" -->
+          <button
+            mat-flat-button
+            class="big-buttonStyles"
+            (click)="personalAccount(stepper)"
+          >
+            Reactivate Your Account
+          </button>
+          <!-- [disabled]="accountFormGroup.invalid" -->
+          <div class="float-right"></div>
+        </form>
+      </mat-step>
+
+      <mat-step
+        *ngIf="
+          accountStatus == status.Dormant &&
+          acctSegment == 'PB-PERSONAL BANKING'
+        "
+        [stepControl]="accountDetailsFormGroup"
+      >
+        <div>
+          <h6
+            style="
+              background-color: rgba(17, 57, 152, 0.16);
+              font-weight: lighter;
+              padding: 20px !important;
+              font-size: medium;
+            "
+          >
+            To complete this request,
+            <br />
+            You will be required to fill your details and upload the following
+            forms: <br />
+            <ul>
+              <li>Utility Bill - Optional</li>
+              <li>Means of Identification - Mandatory</li>
+              <li>Signature - Mandatory</li>
+            </ul>
+            <br />
+            <b>Note: Max Size upload is 2MB</b>
+          </h6>
+        </div>
+
+        <form [formGroup]="accountDetailsFormGroup">
+          <ng-template matStepLabel>
+            Provide details of your account</ng-template
+          >
+
+          <div class="w-100">
+            <mat-form-field
+              appearance="fill"
+              *ngIf="bvnLength < 10"
+              class="w-50"
+            >
+              <mat-label>BVN</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                maxlength="11"
+                minlength="11"
+                placeholder="Enter BVN"
+                formControlName="bvnCtrl"
+                type="text"
+                required
+              />
+              <mat-hint align="end">Max 11 characters</mat-hint>
+              <mat-error
+                *ngIf="
+                  accountDetailsFormGroup.get('bvnCtrl').hasError('required')
+                "
+              >
+                BVN is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field
+              *ngIf="bvnLength > 10"
+              appearance="fill"
+              class="w-50"
+            >
+              <mat-label>BVN</mat-label>
+              <input
+                matInput
+                [value]="maskedBVN"
+                disabled
+                type="text"
+                required
+              />
+              <mat-hint align="end">Max 11 characters</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-50">
+              <mat-label>Phone Number</mat-label>
+              <input matInput disabled [value]="phoneNo" type="text" />
+            </mat-form-field>
+          </div>
+          <div class="w-100" *ngIf="email">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput disabled [value]="email" />
+            </mat-form-field>
+          </div>
+          <div style="margin: 8px">
+            <p>Address</p>
+          </div>
+          <div class="w-100 inline-block">
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="w-50">
+                <mat-label>House No</mat-label>
+                <input
+                  matInput
+                  autocomplete="off"
+                  maxlength=""
+                  minlength=""
+                  placeholder="Enter your house number"
+                  formControlName="houseNo"
+                  type="text"
+                  required
+                />
+                <mat-hint align="end">e.g 2, 2A, House 2, etc</mat-hint>
+                <mat-error
+                  *ngIf="
+                    accountDetailsFormGroup.get('houseNo').hasError('required')
+                  "
+                >
+                  House No is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="w-50">
+                <mat-label>Street</mat-label>
+                <input
+                  matInput
+                  autocomplete="off"
+                  maxlength=""
+                  minlength=""
+                  placeholder="Enter your street"
+                  formControlName="streetCtrl"
+                  type="text"
+                  required
+                />
+                <!-- <mat-hint align="end">Max 11 characters</mat-hint> -->
+                <mat-error
+                  *ngIf="
+                    accountDetailsFormGroup
+                      .get('streetCtrl')
+                      .hasError('required')
+                  "
+                >
+                  Street is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="w-100 inline-block">
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="w-50">
+                <mat-label>City</mat-label>
+                <input
+                  matInput
+                  autocomplete="off"
+                  maxlength=""
+                  minlength=""
+                  placeholder="Enter your city"
+                  formControlName="cityCtrl"
+                  type="text"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    accountDetailsFormGroup.get('cityCtrl').hasError('required')
+                  "
+                >
+                  City is required
+                </mat-error>
+                <mat-hint align="end">e.g Surulere, Lekki</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="w-50">
+                <mat-label>State</mat-label>
+                <input
+                  matInput
+                  autocomplete="off"
+                  maxlength=""
+                  minlength=""
+                  placeholder="Enter your state"
+                  formControlName="stateCtrl"
+                  type="text"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    accountDetailsFormGroup
+                      .get('stateCtrl')
+                      .hasError('required')
+                  "
+                >
+                  State is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <h5
+              style="
+                background-color: rgba(17, 57, 152, 0.16);
+                font-weight: lighter;
+                padding: 20px !important;
+                font-size: medium;
+              "
+            >
+              <div style="text-align: left !important">
+                Please note that you are required to upload a signature on a
+                plain piece of white paper <br />
+                <b>Note : </b>You are required to upload as an image
+              </div>
+            </h5>
+          </div>
+          <label for="">Please select additional service required</label>
+          <div
+            *ngFor="let service of additionalServices"
+            style="padding: 8px !important; width: 49%; display: block"
+          >
+            <mat-checkbox (change)="onChange(service, $event)" color="primary">
+              {{ service }}
+            </mat-checkbox>
+          </div>
+
+          <div *ngIf="additionaServiceSelected.includes('Debit card')">
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="w-50">
+                <mat-label>Preferred Name on the card</mat-label>
+                <input
+                  matInput
+                  autocomplete="off"
+                  maxlength="21"
+                  minlength=""
+                  placeholder="Enter your preferred name"
+                  formControlName="debitCardNameCtrl"
+                  type="text"
+                />
+                <mat-error
+                  *ngIf="
+                    accountDetailsFormGroup.get('debitCardNameCtrl').errors
+                  "
+                >
+                  Preferred name should contain texts only
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="w-50">
+                <mat-label>Preferred Pick up branch</mat-label>
+                <mat-select
+                  formControlName="pickUpBranchCtrl"
+                  placeholder="Please select a pick up branch"
+                >
+                  <mat-option
+                    (click)="onSelect(opt)"
+                    *ngFor="let opt of bankList"
+                    [value]="opt"
+                  >
+                    {{ opt.Branch_Name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <mat-form-field class="w-100">
+              <mat-label>Select an ID type to upload </mat-label>
+              <mat-select
+                formControlName="identificationOptCtrl"
+                placeholder="Please select an identification"
+              >
+                <mat-option
+                  (click)="onSelectIdentification(identification)"
+                  *ngFor="let identification of identificationOptions"
+                  [value]="identification"
+                >
+                  {{ identification }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="identificationSelected">
+              <h4>Please upload your {{ identificationSelected }}</h4>
+
+              <div
+                class="align-left upload-cont"
+                style="padding: 13px !important"
+              >
+                <label
+                  for="file-upload"
+                  class="custom-file-upload"
+                  (click)="fileInput.click()"
+                  >Choose File
+                </label>
+
+                <input
+                  hidden
+                  accept="image/jpg,image/png,image/jpeg,application/pdf"
+                  (change)="onFileSelected($event, 'Identification')"
+                  #fileInput
+                  type="file"
+                  formContolName="fileInputCtrl"
+                  id="file"
+                />
+              </div>
+              <div *ngIf="fileResult" class="selected-file">
+                <label class="file-text" for="">
+                  {{ fileResult }}
+                  <img
+                    style="margin-left: 10px"
+                    src="../../../assets/images/Group773.png"
+                    height="15"
+                    width="15"
+                  />
+                </label>
+
+                <mat-icon
+                  class="cancel-icn"
+                  (click)="removeSelectedFile('Identification')"
+                  >cancel</mat-icon
+                >
+              </div>
+              <div class="fileError-cls">
+                {{ _fileError }}
+              </div>
+            </div>
+            <div *ngIf="fileResult">
+              <h5>
+                Please enter the unique id number attached to your
+                {{ identificationSelected }}
+              </h5>
+            </div>
+            <mat-form-field *ngIf="fileResult" appearance="fill" class="w-100">
+              <mat-label>
+                Please enter the ID number attached to your
+                {{ identificationSelected }}</mat-label
+              >
+              <input
+                matInput
+                autocomplete="off"
+                maxlength="30"
+                minlength="2"
+                formControlName="identificationIDCtrl"
+                required
+              />
+              <mat-hint align="end">Max 30 characters</mat-hint>
+              <mat-error
+                *ngIf="
+                  accountDetailsFormGroup
+                    .get('identificationIDCtrl')
+                    .hasError('required')
+                "
+              >
+                ID is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <h4>Please upload a proof of utility bill (Optional)</h4>
+
+            <div
+              class="align-left upload-cont"
+              style="padding: 13px !important"
+            >
+              <label
+                for="file-upload"
+                class="custom-file-upload"
+                (click)="utilityInput.click()"
+                >Choose File
+              </label>
+
+              <input
+                hidden
+                accept="image/jpg,image/png,image/jpeg,application/pdf"
+                (change)="onFileSelected($event, 'Utility Bill')"
+                #utilityInput
+                type="file"
+                formContolName="utililtyBillCtrl"
+                id="file"
+              />
+            </div>
+            <div *ngIf="utililtyBill" class="selected-file">
+              <label class="file-text" for="">
+                {{ utililtyBill }}
+                <img
+                  style="margin-left: 10px"
+                  src="../../../assets/images/Group773.png"
+                  height="15"
+                  width="15"
+                />
+              </label>
+
+              <mat-icon
+                class="cancel-icn"
+                (click)="removeSelectedFile('Utility Bill')"
+                >cancel</mat-icon
+              >
+            </div>
+            <div class="fileError-cls">
+              {{ _utilityFileError }}
+            </div>
+          </div>
+
+          <div>
+            <h4>Please upload signature</h4>
+
+            <div
+              class="align-left upload-cont"
+              style="padding: 13px !important"
+            >
+              <label
+                for="file-upload"
+                class="custom-file-upload"
+                (click)="signatureFileInput.click()"
+                >Choose File
+              </label>
+
+              <input
+                hidden
+                accept="image/jpg,image/png,image/jpeg,application/pdf"
+                (change)="onFileSelected($event, 'Signature')"
+                #signatureFileInput
+                type="file"
+                formContolName="signature"
+                id="signatureFileInput"
+              />
+            </div>
+            <div *ngIf="signatureFile" class="selected-file">
+              <label class="file-text" for="">
+                {{ signatureFile }}
+                <img
+                  style="margin-left: 10px"
+                  src="../../../assets/images/Group773.png"
+                  height="15"
+                  width="15"
+                />
+              </label>
+
+              <mat-icon
+                class="cancel-icn"
+                (click)="removeSelectedFile('Signature')"
+                >cancel</mat-icon
+              >
+            </div>
+            <div class="fileError-cls">
+              {{ signatureFileError }}
+            </div>
+          </div>
+          <section *ngIf="detailFormSpinner">
+            <mat-progress-bar
+              class="example-margin"
+              [color]="color"
+              [mode]="mode"
+              [value]="value"
+              [bufferValue]="bufferValue"
+            >
+            </mat-progress-bar>
+          </section>
+
+          <div style="text-align: center" class="center-div">
+            <button
+              style="
+                margin-right: 20px !important;
+                background-color: rgba(3, 150, 253, 0.16);
+                text-transform: uppercase;
+                color: #0396fd;
+                width: 40% !important;
+                height: 50px;
+              "
+              mat-button
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              style="
+                color: #ffffff;
+                background-color: #113998;
+                width: 40% !important;
+                height: 50 px;
+                text-transform: uppercase;
+              "
+              [ngClass]="{ disabled: validateStepper() }"
+              mat-button
+              [disabled]="validateStepper()"
+              (click)="proceedToAccountValidation(stepper)"
+            >
+              Confirm Request
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step
+        *ngIf="
+          isAccountCorporateAndDormant && acctSegment != 'PB-PERSONAL BANKING'
+        "
+        [stepControl]="corporateAccountDetailsForm"
+      >
+        <ng-template matStepLabel> Upload details of your account</ng-template>
+        <div>
+          <h6
+            style="
+              background-color: rgba(17, 57, 152, 0.16);
+              font-weight: lighter;
+              padding: 20px !important;
+              font-size: medium;
+            "
+          >
+            To complete this request,
+            <br />
+            You will required to upload the following forms: <br />
+            <ul>
+              <li>Instruction signed by signatories - Mandatory</li>
+              <li>Board resolution (where applicable) - Optional</li>
+              <li>ID card of signatories - Mandatory</li>
+            </ul>
+            <br />
+            <b
+              >Please state Account name, Account number,TIN and BVN on your
+              instruction before upload</b
+            >
+            <br />
+            <br />
+            <b>Note: Max Size upload is 2MB</b>
+          </h6>
+        </div>
+        <form [formGroup]="corporateAccountDetailsForm">
+          <div
+            class="align-left upload-cont"
+            style="padding: 13px !important; margin-bottom: 20px !important"
+          >
+            <label
+              for=""
+              class="custom-file-upload"
+              (click)="IntroLetter.click()"
+              >Instruction on letterhead
+              <img
+                class="downloadicon"
+                src="../../../../../assets/images/upload2.png"
+                width="20px"
+                height="15px"
+            /></label>
+            <input
+              hidden
+              accept="image/jpg,image/png,image/jpeg,application/pdf"
+              required
+              (change)="onFileSelected($event, 'IntroLetter')"
+              #IntroLetter
+              type="file"
+              formContolName="IntroLetter"
+              id="file"
+            />
+          </div>
+          <div>
+            <div *ngIf="IntroLetterFileName" class="selected-file">
+              <label class="file-text" for="">
+                {{ IntroLetterFileName }}
+                <img
+                  style="margin-left: 10px"
+                  src="../../../assets/images/Group773.png"
+                  height="15"
+                  width="15"
+                />
+              </label>
+              <mat-icon
+                class="cancel-icn"
+                (click)="removeSelectedFile('IntroLetter')"
+                >cancel</mat-icon
+              >
+            </div>
+            <div class="fileError-cls">
+              {{ introLetterError }}
+            </div>
+          </div>
+
+          <div
+            class="align-left upload-cont"
+            style="padding: 13px !important; margin-top: 15px !important"
+          >
+            <label
+              for="file-upload"
+              class="custom-file-upload"
+              (click)="resolutionInput.click()"
+            >
+              Upload Board Resolution
+              <img
+                class="downloadicon"
+                src="../../../../../assets/images/upload2.png"
+                width="20px"
+                height="15px"
+            /></label>
+            <input
+              hidden
+              accept="image/jpg,image/png,image/jpeg,application/pdf"
+              (change)="onFileSelected($event, 'Board Resolution')"
+              #resolutionInput
+              type="file"
+              formContolName="resolutionFileCtrl"
+              id="resolutionInput"
+            />
+          </div>
+          <div>
+            <div *ngIf="resolutionFile" class="selected-file">
+              <label class="file-text" for="">
+                {{ resolutionFile }}
+                <img
+                  style="margin-left: 10px"
+                  src="../../../assets/images/Group773.png"
+                  height="15"
+                  width="15"
+                />
+              </label>
+              <mat-icon
+                class="cancel-icn"
+                (click)="removeSelectedFile('Board Resolution')"
+                >cancel</mat-icon
+              >
+            </div>
+          </div>
+
+          <div class="fileError-cls">
+            {{ resolutionFileError }}
+          </div>
+
+          <div class="align-left upload-cont" style="padding: 13px !important">
+            <label
+              for=" "
+              class="custom-file-upload"
+              (click)="SignatoriesID.click()"
+              >Means of ID of signatories
+              <img
+                class="downloadicon"
+                src="../../../../../assets/images/upload2.png"
+                width="20px"
+                height="15px"
+            /></label>
+            <input
+              hidden
+              accept="image/jpg,image/png,image/jpeg,application/pdf"
+              required
+              (change)="onFileSelected($event, 'SignatoriesID')"
+              #SignatoriesID
+              type="file"
+              formContolName="SignatoriesID"
+              id="SignatoriesID"
+            />
+          </div>
+          <div>
+            <div *ngIf="directorsIDFileName" class="selected-file">
+              <label class="file-text" for="">
+                {{ directorsIDFileName }}
+                <img
+                  style="margin-left: 10px"
+                  src="../../../assets/images/Group773.png"
+                  height="15"
+                  width="15"
+                />
+              </label>
+              <mat-icon
+                class="cancel-icn"
+                (click)="removeSelectedFile('SignatoriesID')"
+                >cancel</mat-icon
+              >
+            </div>
+            <div class="fileError-cls">
+              {{ directorsIDFileError }}
+            </div>
+          </div>
+          <section *ngIf="showSpinner">
+            <mat-progress-bar
+              class="example-margin"
+              [color]="color"
+              [mode]="mode"
+              [value]="value"
+              [bufferValue]="bufferValue"
+            >
+            </mat-progress-bar>
+          </section>
+          <div style="text-align: center" class="center-div">
+            <button
+              style="
+                color: #ffffff;
+                background-color: #113998;
+                width: 100% !important;
+                height: 50 px;
+                text-transform: uppercase;
+              "
+              [ngClass]="{ disabled: corporateAccountDetailsForm.invalid }"
+              mat-button
+              [disabled]="corporateAccountDetailsForm.invalid"
+              (click)="proceedToAccountValidation(stepper)"
+            >
+              Confirm Request
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="personalAccountForm">
+        <ng-template matStepLabel>Personal Account Reactivation</ng-template>
+        <div>Hello world</div>
+        <div style="text-align: center" class="center-div">
+          <button
+            style="
+              color: #ffffff;
+              background-color: #113998;
+              width: 40% !important;
+              height: 50 px;
+              text-transform: uppercase;
+            "
+            mat-button
+            (click)="proceedToAccountValidation(stepper)"
+          >
+            Confirm Request
+          </button>
+        </div>
+      </mat-step>
+
+      <mat-step class="align-left" [stepControl]="otpForm">
+        <ng-template matStepLabel>Verify OTP</ng-template>
+
+        <form [formGroup]="otpForm">
+          <section *ngIf="showSpinner">
+            <mat-progress-bar
+              class="example-margin"
+              [color]="color"
+              [mode]="mode"
+              [value]="value"
+              [bufferValue]="bufferValue"
+            >
+            </mat-progress-bar>
+          </section>
+          <div class="">
+            <h4>Please provide the OTP sent to your registered phone number</h4>
+
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Enter OTP</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                type="password"
+                placeholder="Enter the verification otp"
+                formControlName="otpControl"
+                minlength="5"
+                maxlength="5"
+                required
+              />
+              <mat-hint
+                align="end"
+                class="cursor"
+                style="color: #1428c4"
+                (click)="resendOTP()"
+                >Resend OTP</mat-hint
+              >
+            </mat-form-field>
+          </div>
+          <button
+            mat-flat-button
+            class="big-buttonStyles"
+            [ngClass]="{ primary: class == 'primary' }"
+            [disabled]="isAwaitingResponse"
+            (click)="proceedToAccountValidation(stepper)"
+          >
+            Proceed
+          </button>
+          <!-- [disabled]="otpForm.invalid || showSpinner" -->
+        </form>
+      </mat-step>
+      <mat-step>
+        <form>
+          <ng-template matStepLabel state="check">Done</ng-template>
+
+          <h5
+            style="
+              background-color: rgba(100, 231, 152, 0.16);
+              text-align: center;
+              font-weight: lighter;
+              padding: 20px !important;
+              font-size: medium;
+            "
+          >
+            <div style="text-align: center !important">
+              <img
+                src="../../../assets/images/Group773.png"
+                height="64"
+                width="64"
+              />
+            </div>
+            Your Account Reactivation request has been successfully submitted
+            <br />
+            <br />Your ticket ID is: <b>{{ ticketID }}</b
+            >. <br />
+            <br />
+            Please keep this ID safe for future reference. For further
+            enquiries, contact the Customer Contact Centre on 0700 909 909 909
+          </h5>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>
+
+<ng-template #informationModalTemplate>
+  <div>
+    <h3 class="docs-required">
+      Account has been validated successfully for {{ accountName }}
+    </h3>
+    <p *ngIf="accountStatus === status.Inactive">
+      Please perform any debit/credit transaction via any of the Bank’s
+      Branch/e-channel to activate your account<br />
+    </p>
+    <p *ngIf="accountStatus === status.Active">
+      The account is active, Please proceed with transactions on your account.
+      <br />
+    </p>
+    <div>
+      <button
+        style="
+          margin-right: 15px;
+          background-color: rgba(3, 150, 253, 0.16);
+          text-transform: uppercase;
+          color: #1428c4 !important;
+          width: auto !important;
+          height: 50 px;
+          float: right;
+        "
+        mat-flat-button
+        class="big-buttonStyles"
+        [ngClass]="{ primary: class == 'primary' }"
+        (click)="disagreeTC()"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- modal -->
+<ng-template #termsAndConditionModalTemplate>
+  <div class="page-wrapper">
+    <div>
+      <a class="fa fa-times close-reveal-modal1"></a>
+      <div class="row" style="clear: both">
+        <div class="col-md-12 col-xs-12 text-center" style="margin: 0 auto">
+          <div
+            class="large-12 medium-12 small-12 medium-centered large-centered columns tc-wrap"
+            style="width: 100%; margin-left: auto; margin-right: auto"
+          >
+            <div class="sb-logo" style="text-align: center">
+              <img
+                height="25"
+                src="../../../assets/images/standard_bank_logo 1.png"
+                width="20"
+              />
+            </div>
+            <div class="tc-header">Terms &amp; Conditions</div>
+            <div>
+              These are the Terms of Stanbic IBTC Mobile Banking APP, together
+              with the terms and conditions that apply to any account or service
+              you may access using this App (the Product Terms); and our Online
+              Banking Terms and Conditions; and any other terms and conditions
+              that we may advise you shall govern and regulate your use of this
+              Mobile Banking APP. By downloading this App and enrolling for the
+              Mobile Banking Services thereon (the Services), you are agreeing
+              to be bound by all the terms and conditions contained herein.
+              <br /><br />In the event of a conflict between the App Terms and
+              the Product Terms or Online Banking Terms and Conditions, the App
+              Terms will apply. The latest version of these Terms applies each
+              time you use this App to access our Services<br /><br /><b
+                >Mobile Banking App</b
+              ><br />Before you can use this App and our online services
+              (including products), you must register with us, and we must
+              accept your registration. We may accept or reject your
+              registration at our sole discretion (in our own judgement) without
+              giving reasons.<br /><br /><b>Types of information on our App</b
+              ><br />
+              All information provided via this App is only intended to give you
+              general information about us, our products, services and goals.
+              You should not regard anything on our App and website as an offer,
+              only as an invitation to do business with us. We provide all
+              information "as is" and you may not rely on it or treat it as
+              professional advice. You should always discuss any advice with a
+              professional advisor before doing anything based on any
+              information on this App. <br /><br /><b>Changes to these Terms</b
+              ><br />
+              We may change these Terms from time to time. The latest version of
+              these Terms apply whenever you use the App. A certificate (letter)
+              signed by the administrator of this website is prima facie
+              (initial) proof of the date and content of the latest and any
+              previous version of these Terms. <br /><br /><b>
+                Information on our Mobile Banking App and Website </b
+              ><br />We may use other organisations to provide information on
+              this App and/or our website. We have no control over this
+              information and do not warrant or guarantee that it is correct or
+              suitable for anything. Any of this information is provided "as is"
+              and we are not directly or indirectly responsible for any loss
+              that may follow from you relying on it. <br /><br /><b
+                >Links to other websites</b
+              ><br />The App may link to other websites with information or
+              content from other parties. Although we try to only link to
+              trustworthy parties or systems we are not responsible for any of
+              this other information. If we provide a link to any other
+              information, website, person or business, it does not mean that we
+              have checked or approve of them. We do not give any warranty about
+              any other website, software or hardware, including their security
+              or performance. You waive (give up) any claim you may have against
+              us for any loss or damage you may suffer because you connect to
+              any other website. <br /><br /><b>Non Permissible Activities</b
+              ><br />You are not allowed to copy or reproduce all or any part of
+              this App or alter, modify or adapt all or any part of the App. You
+              shall not remove or tamper with any copyright notice contained
+              within or attached to the App. You recognize that all ownership
+              rights in the App is vested in and remains with us.<br /><br />The
+              logos and trade marks on our App are our registered and
+              unregistered trademarks or those of other parties. Nothing on our
+              App and our website is a licence (permission) to use any trade
+              mark for any other purpose without first getting written
+              permission from us or any other party that has rights to the
+              intellectual property<br /><br /><b>Your Security Obligations</b
+              ><br />
+              You must take all reasonable precautions to keep safe and prevent
+              fraudulent use of your mobile device and security information.
+              <br /><br />These precautions include: <br />
+
+              never writing down or otherwise recording your security details in
+              a way that can be understood by someone else; not choosing
+              security details that may be easy to guess; taking care to ensure
+              that no one hears or sees your security details when you use it;
+              not disclosing your security details to anyone, including us;
+              changing your security details immediately and telling us as soon
+              as possible if you know, or even suspect, that someone else knows
+              your security details; keeping your security details and mobile
+              device safe; complying with all reasonable instructions we issue
+              regarding keeping your security details safe; logging out of the
+              Mobile Banking App once you have finished using the Mobile Banking
+              App services and undertake reasonable and adequate safeguards to
+              scan for computer viruses or other destructive properties.<br /><br />We
+              will not be liable for any instruction given by you or anyone
+              acting with your authority from the moment you log on to the
+              Mobile Banking App until you log off the Mobile Banking App. You
+              are responsible for making sure information shown or stored on
+              mobile device is kept secure. You must advise us of any change to
+              your mobile phone number without delay.<br /><br /><b>
+                Use of suitable Hardware and Software </b
+              ><br />
+              You must use and update hardware and software (phones, tablets,
+              any electronic device or and programs) suitable for this App, our
+              website and the online services. If you do not, the App may not
+              work properly and this could increase your security risks. If we
+              offer any software to you on or through our App and or website,
+              the licence agreement is between you and the software licensor
+              (owner).<br />
+              <b>
+                <i>
+                  You indemnify us against any breach of a software licence. We
+                  do not expressly or implicitly warrant that any software is of
+                  good quality or suitable for its purpose. We also do not
+                  warrant that any file, download or application available on
+                  the communication system is safe to use on any phones,
+                  tablets. We cannot guarantee that it contains no software or
+                  data that can negatively affect an electronic device or
+                  computer system, such as viruses, trojans and other malicious
+                  software. </i
+                ><br /><br />
+
+                Risks of sending information over the Internet.
+                <i>
+                  Information sent over the Internet, including email, can be
+                  intercepted, seen or changed. We take steps to limit these
+                  risks. Because we cannot stop all illegal activities, we are
+                  not responsible for any loss or damage you may suffer as a
+                  result. </i
+                >Closing, suspending or limiting the App and/or our website.
+              </b>
+              We may change, suspend the use of this App and other online
+              services temporarily or permanently without giving notice. We may
+              also limit certain services, features or functions, and we may
+              restrict access to all or parts of any service on the App.<br /><b
+                ><br />Disclaimer and limits of our responsibility</b
+              ><br /><i>
+                Your use of this App is dependent on factors beyond our control,
+                such as the network coverage or availability of your Internet
+                Service Provider’s availability. We are not liable for any loss
+                or damages you may suffer if a factor beyond our control arises,
+                and you cannot access this App and our online services. </i
+              ><br /><b>
+                <i>
+                  You use this App and the online services entirely at your own
+                  risk. You are fully responsible for any loss or damage that
+                  may result from you using or not being able to use this App or
+                  any of its content, information or any online service. We
+                  (including our owners, agents, consultants, employees and any
+                  affiliated person) are not responsible for any loss or damages
+                  related to your use of this App and our online Services. This
+                  includes, without limitation, any direct, indirect, special,
+                  incidental, consequential or punitive damages in terms of any
+                  contract, tort (breach of a duty of care) or law, and even if
+                  we were expressly told that any loss or damage was possible.
+                  We are not responsible for any loss that results from:<br />
+                  <ul>
+                    <li>
+                      any technical or other problem (including interruption,
+                      malfunction, downtime or other failure) that affects our
+                      App, system or any online service or any database for any
+                      reason;
+                    </li>
+                    <li>
+                      any problem affecting any other goods or services provided
+                      by any other party, for example any telecommunication or
+                      Internet service provider, electricity supplier, or local
+                      or other authority;
+                    </li>
+                    <li>
+                      any loss of or damage to any personal information or other
+                      data caused directly or indirectly by technical problems,
+                      power failures, unlawful acts (such as data theft), any
+                      harmful computer program or virus, or because of your own
+                      negligence ;
+                    </li>
+                    <li>
+                      any order, investment decision or purchase or disposal of
+                      goods or services (including any financial instrument or
+                      currency) from any other party based on any information on
+                      our website; or
+                    </li>
+                    <li>any event over which we have no direct control.</li>
+                  </ul>
+                </i> </b
+              ><br /><b>Legal Capacity </b><br />
+              You warrant to us that you are legally capable of agreeing to
+              these Terms. If you are younger than 18, or if you are not sure if
+              you can legally enter into agreements without your legal guardian
+              agreeing to it with you, you must find out before you use the
+              APP.<br /><br /><b>Unauthorised transactions</b><br />
+              You will be responsible for all losses arising from unauthorised
+              transactions on your account where you intentionally or
+              negligently fail to use the Mobile Banking App in accordance with
+              the Terms including but not limited to keeping your security
+              details safe and secure, or you intentionally or negligently fail
+              to notify us if you reasonably believe that someone else knows
+              your security details or has used or tried to use your security
+              details.
+              <br /><br /><b>
+                We may deny you access to this App immediately in the following
+                situations; </b
+              ><br />
+              If you fail to use the Mobile Banking App for 12 months or for
+              such period as we may in our sole and absolute discretion
+              determine; you will have to re-register in order to use the Mobile
+              Banking App gain; or If you have consistently breached any of the
+              Terms of this App or the Product Terms including where; you are,
+              or we reasonably suspect you may be, using or obtaining, or
+              allowing someone else to use an account or receive services or
+              money illegally; or your account is, or we reasonably suspect your
+              account is, being used for an illegal or fraudulent purpose; or we
+              have reasonable grounds to suspect fraudulent use of your security
+              details; or we have reasonable grounds for believing you have
+              committed or are about to commit a crime in connection with your
+              account; or you have not satisfied any anti-money laundering
+              requirements or there has been or we suspect there has been fraud
+              involving any of your accounts with us; or If there has been or we
+              suspect there has been suspicious activity on your account; or If
+              you stop holding any account, product or service in respect of
+              which the Mobile Banking App may be used.<br /><br /><b>General</b
+              ><br />
+              The headings in these Terms are only for information. Do not
+              consider them when you interpret the Terms. Any favour we may
+              allow you will not affect any of our rights against you, whether
+              the favour is expressed (said) or implied (not said). We do not
+              waive (give up) any of our rights. If any clause in these Terms is
+              invalid or illegal or cannot be enforced, the remaining clauses
+              will continue to be valid.<br /><br /><b
+                >The law that applies to these Terms</b
+              ><br />The laws of Nigeria shall govern these Terms. The Terms of
+              this App are in English language and any Communications we send to
+              you will be in English. Except stated otherwise, all copyright in
+              the screens, pages and any material included in the App is owned
+              by or licensed to us or members of Stanbic IBTC Group.
+            </div>
+          </div>
+          <div style="padding-bottom: 20px">
+            <section *ngIf="showSpinner">
+              <mat-progress-bar
+                class="example-margin"
+                [color]="color"
+                [mode]="mode"
+                [value]="value"
+                [bufferValue]="bufferValue"
+              >
+              </mat-progress-bar>
+            </section>
+          </div>
+          <div class="terms-condition">
+            <mat-checkbox [(ngModel)]="isIAgreeChecked"> I Agree</mat-checkbox>
+            <div style="padding-top: 20px">
+              <button
+                style="
+                  float: right;
+                  color: #ffffff;
+                  width: auto !important;
+                  height: 50 px;
+                  text-transform: uppercase;
+                "
+                mat-flat-button
+                class="big-buttonStyles"
+                [ngClass]="{ primary: class == 'primary' }"
+                [disabled]="!isIAgreeChecked"
+                (click)="closeTermsAndOpenAction()"
+              >
+                Proceed
+              </button>
+              <button
+                style="
+                  border: 1px solid red;
+                  margin-right: 15px;
+                  background-color: transparent;
+                  text-transform: uppercase;
+                  color: red !important;
+                  width: auto !important;
+                  height: 50 px;
+                  float: right;
+                "
+                mat-flat-button
+                class="big-buttonStyles"
+                [ngClass]="{ primary: class == 'primary' }"
+                (click)="goHome()"
+              >
+                Disagree
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- <ng-template #reactivateAccountModal>
+  <div>
+    <p>
+      <b>Your account is dormant, click to reactivate account.</b>
+    </p>
+    <button
+      mat-flat-button
+      class="big-buttonStyles"
+      [ngClass]="{ primary: class == 'primary' }"
+      (click)="closeDialogModal()"
+    >
+      Reactivate
+    </button>
+  </div>
+</ng-template> -->
+
+<!-- personalAccountModal -->
+<ng-template #personalAccountModal>
+  <div>
+    <p><b>Personal Account Reactivation Form</b></p>
+  </div>
+  <div>
+    <div>
+      <p><b>Is Account a salary Account?</b></p>
+      <div class="column col-desc">
+        <input type="checkbox" name="" id="" />YES
+      </div>
+      <div class="column col-stepper-container">
+        <input type="checkbox" name="" id="" />NO
+      </div>
+    </div>
+    <div>
+      <p><b>Download reference letter</b></p>
+    </div>
+    <!-- <div>
+      <div class="column col-desc">
+        <input type="checkbox" name="" id="" />YES
+      </div>
+      <div class="column col-stepper-container">
+        <input type="checkbox" name="" id="" />NO
+      </div>
+    </div> -->
+    <div
+      class="w-100"
+      style="padding: 13px !important; margin-top: 15px !important"
+    >
+      <button
+        mat-flat-button
+        class="big-buttonStyles"
+        (click)="moveToCorporateAccount(stepper)"
+      >
+        Download Reference Letter
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #accountActionModal>
+  <form style="padding-top: 8px !important">
+    <button
+      mat-flat-button
+      class="big-buttonStyles"
+      [ngClass]="{ primary: class == 'primary' }"
+      [disabled]="isAwaitingResponse"
+      (click)="closeDialogModal()"
+    >
+      Get started
+    </button>
+
+    <button
+      mat-flat-button
+      class="big-buttonStyles"
+      [ngClass]="{ primary: class == 'primary' }"
+      [disabled]="isAwaitingResponse"
+      (click)="closeDialogModal()"
+    >
+      or continue previous session
+    </button>
+  </form>
+</ng-template>
+
+<ng-template #savingAccountModal>
+  <p><b>Saving Account Form</b></p>
+  <div>
+    <div class="w-100">
+      <mat-form-field appearance="fill">
+        <mat-label>Preferred Pick up branch</mat-label>
+        <select matNativeControl placeholder="Please select a pick up branch">
+          <option
+            (click)="onSelect(opt)"
+            *ngFor="let opt of bankList"
+            [value]="opt"
+          >
+            {{ opt.Branch_Name }}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field class="w-100">
+        <mat-label>NOK Details</mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          placeholder="Enter Nok Details"
+          type="text"
+          required
+        />
+        <mat-error> Enter Nok Details </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field class="w-100">
+        <mat-label>NOK Fullname</mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          placeholder="Enter Nok Fullname"
+          type="text"
+          required
+        />
+        <mat-error> Enter Nok Details </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field class="w-100">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput autocomplete="off" type="date" required />
+        <mat-error> Valid date of birth </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field class="w-100">
+        <mat-label>Address</mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          placeholder="Address"
+          type="text"
+          required
+        />
+        <mat-error>Address</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field class="w-100">
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          placeholder="Enter Phone Number"
+          type="text"
+          required
+        />
+        <mat-error> Enter Phone Number </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field class="w-100">
+        <mat-label>Email Address</mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          placeholder="Enter Email Address"
+          type="email"
+          required
+        />
+        <mat-error> Enter Email Address </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field appearance="fill">
+        <mat-label>Gender</mat-label>
+        <select matNativeControl placeholder="Please select a pick up branch">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field appearance="fill">
+        <mat-label>Employment Status</mat-label>
+        <select matNativeControl placeholder="Please select a pick up branch">
+          <option value="Employed">Employed</option>
+          <option value="Unemployed">Unemployed</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <mat-form-field appearance="fill">
+        <mat-label>Select occupation</mat-label>
+        <select matNativeControl placeholder="Please select a pick up branch">
+          <option value="Employed">Developer</option>
+          <option value="Unemployed">Banker</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="w-100">
+      <button
+        style="
+          color: #ffffff;
+          background-color: #113998;
+          width: 100% !important;
+          height: 50 px;
+          text-transform: uppercase;
+        "
+        mat-button
+        (click)="moveToStepper(stepper)"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #corporateAccountModal>
+  <p><b>Coporate Account Form</b></p>
+  <form [formGroup]="corporateAccountDetailsForm">
+    <div
+      class="align-left upload-cont"
+      style="padding: 13px !important; margin-bottom: 20px !important"
+    >
+      <label for="" class="custom-file-upload" (click)="IntroLetter.click()"
+        >Upload Company instruction Signed. At least one signatory.
+        <img
+          class="downloadicon"
+          src="../../../../../assets/images/upload2.png"
+          width="20px"
+          height="15px"
+      /></label>
+      <input
+        hidden
+        accept="image/jpg,image/png,image/jpeg,application/pdf"
+        required
+        (change)="onFileSelected($event, 'IntroLetter')"
+        #IntroLetter
+        type="file"
+        formContolName="IntroLetter"
+        id="file"
+      />
+    </div>
+    <div>
+      <div *ngIf="IntroLetterFileName" class="selected-file">
+        <label class="file-text" for="">
+          {{ IntroLetterFileName }}
+          <img
+            style="margin-left: 10px"
+            src="../../../assets/images/Group773.png"
+            height="15"
+            width="15"
+          />
+        </label>
+        <mat-icon class="cancel-icn" (click)="removeSelectedFile('IntroLetter')"
+          >cancel</mat-icon
+        >
+      </div>
+      <div class="fileError-cls">
+        {{ introLetterError }}
+      </div>
+    </div>
+
+    <div
+      class="align-left upload-cont"
+      style="padding: 13px !important; margin-top: 15px !important"
+    >
+      <label
+        for="file-upload"
+        class="custom-file-upload"
+        (click)="resolutionInput.click()"
+      >
+        Upload Valid ID
+        <img
+          class="downloadicon"
+          src="../../../../../assets/images/upload2.png"
+          width="20px"
+          height="15px"
+      /></label>
+      <input
+        hidden
+        accept="image/jpg,image/png,image/jpeg,application/pdf"
+        (change)="onFileSelected($event, 'Board Resolution')"
+        #resolutionInput
+        type="file"
+        formContolName="resolutionFileCtrl"
+        id="resolutionInput"
+      />
+    </div>
+    <div>
+      <div *ngIf="resolutionFile" class="selected-file">
+        <label class="file-text" for="">
+          {{ resolutionFile }}
+          <img
+            style="margin-left: 10px"
+            src="../../../assets/images/Group773.png"
+            height="15"
+            width="15"
+          />
+        </label>
+        <mat-icon
+          class="cancel-icn"
+          (click)="removeSelectedFile('Board Resolution')"
+          >cancel</mat-icon
+        >
+      </div>
+    </div>
+
+    <div class="fileError-cls">
+      {{ resolutionFileError }}
+    </div>
+
+    <div class="align-left upload-cont" style="padding: 13px !important">
+      <label for=" " class="custom-file-upload" (click)="SignatoriesID.click()"
+        >Upload Evidence of Address
+        <img
+          class="downloadicon"
+          src="../../../../../assets/images/upload2.png"
+          width="20px"
+          height="15px"
+      /></label>
+      <input
+        hidden
+        accept="image/jpg,image/png,image/jpeg,application/pdf"
+        required
+        (change)="onFileSelected($event, 'SignatoriesID')"
+        #SignatoriesID
+        type="file"
+        formContolName="SignatoriesID"
+        id="SignatoriesID"
+      />
+    </div>
+    <div>
+      <div *ngIf="directorsIDFileName" class="selected-file">
+        <label class="file-text" for="">
+          {{ directorsIDFileName }}
+          <img
+            style="margin-left: 10px"
+            src="../../../assets/images/Group773.png"
+            height="15"
+            width="15"
+          />
+        </label>
+        <mat-icon
+          class="cancel-icn"
+          (click)="removeSelectedFile('SignatoriesID')"
+          >cancel</mat-icon
+        >
+      </div>
+      <div class="fileError-cls">
+        {{ directorsIDFileError }}
+      </div>
+    </div>
+    <section *ngIf="showSpinner">
+      <mat-progress-bar
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="value"
+        [bufferValue]="bufferValue"
+      >
+      </mat-progress-bar>
+    </section>
+    <div style="text-align: center" class="center-div">
+      <button
+        style="
+          color: #ffffff;
+          background-color: #113998;
+          width: 100% !important;
+          height: 50 px;
+          text-transform: uppercase;
+        "
+        [ngClass]="{ disabled: corporateAccountDetailsForm.invalid }"
+        mat-button
+        [disabled]="corporateAccountDetailsForm.invalid"
+        (click)="moveToSavingsAccount(stepper)"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</ng-template>

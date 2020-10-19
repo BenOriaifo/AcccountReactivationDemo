@@ -1,0 +1,52 @@
+# Node.js with Angular
+
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+  displayName: 'npm install dependencies'
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    customRegistry: 'useFeed'
+    customFeed: '8071490c-7550-4eca-9cb8-4ae282bd75d9'
+
+- script: npx ng build --prod
+  displayName: 'Build'
+
+
+
+- script: npx ng test --watch=false --codeCoverage=true
+  displayName: 'Tests'
+
+- task: PublishCodeCoverageResults@1
+  condition: succeededOrFailed()
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/CustomerQuickService-UI/cobertura-coverage.xml'
+  displayName: 'Publish Code Coverage Results'
+
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    # Make sure you've changed testResultsFiles to the one below 
+    testResultsFiles: '**/TESTS-*.xml'
+  displayName: 'Publish Test Results'
