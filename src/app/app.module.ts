@@ -28,7 +28,7 @@ import { AccountReactivationComponent } from './pages/account-reactivation/accou
 @NgModule({
   declarations: [
     AppComponent,
-    AccountReactivationComponent 
+   AccountReactivationComponent 
   ],
   imports: [
     BrowserModule,
