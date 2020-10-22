@@ -33,6 +33,7 @@ export class AccountReactivationComponent implements OnInit {
   accountDetailsFormGroup: FormGroup;
   corporateAccountDetailsForm: FormGroup;
   personalAccountForm: FormGroup;
+  reactivateDormantAccount: FormGroup;
   class = '';
   color = 'primary';
   mode = 'query';
@@ -122,6 +123,9 @@ export class AccountReactivationComponent implements OnInit {
   detailFormSpinner: boolean;
   atmPickUpBranchSelected: PickupBranch;
   directorSignatoryFileExt: string;
+  option;
+  savings;
+  ticket;
   isVerifyFormActive = false;
   isVerifyFormDone = false;
   isDetailFormActive = false;
@@ -131,6 +135,7 @@ export class AccountReactivationComponent implements OnInit {
   bankList = _banksList;
   maskedBVN: string;
   bvnLength: number;
+  isSavings = false;
   constructor(
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -170,6 +175,7 @@ export class AccountReactivationComponent implements OnInit {
     this.otpForm = this.formBuilder.group({
       otpControl: ['', Validators.required],
     });
+    // this.savingAccount();
     this.showTermsAndCondition();
     // this.showAccountActionModal();
     //this.loadBankPickUpBranches();
@@ -262,7 +268,9 @@ export class AccountReactivationComponent implements OnInit {
 
     return false;
   }
-
+  savingsAccount() {
+    this.isSavings = true;
+  }
   onSelect(opt) {
     console.log(opt);
     this.atmPickUpBranchSelected = opt;
@@ -286,7 +294,7 @@ export class AccountReactivationComponent implements OnInit {
     this.termsAndConditionModalRef = this.dialog.open(
       this.termsAndConditionModalTemplate,
       {
-        width: '800px',
+        width: '1200px',
         height: '600px',
         disableClose: true,
       }
@@ -310,8 +318,8 @@ export class AccountReactivationComponent implements OnInit {
   }
   showAccountActionModal() {
     this.accountActionRef = this.dialog.open(this.accountActionModal, {
-      width: '400px',
-      height: '200px',
+      width: '686px',
+      height: '320px',
       disableClose: true,
     });
     this.accountActionRef.afterClosed().subscribe((result) => {
@@ -331,11 +339,11 @@ export class AccountReactivationComponent implements OnInit {
     this.proceedToAccountValidation(stepper);
   }
   personalAccount(stepper) {
-    this.personalAccountModalRef = this.dialog.open(this.personalAccountModal, {
-      width: '400px',
-      height: '200px',
-      disableClose: true,
-    });
+    // this.personalAccountModalRef = this.dialog.open(this.personalAccountModal, {
+    //   width: '400px',
+    //   height: '200px',
+    //   disableClose: true,
+    // });
   }
   reactivateAccount(stepper) {
     this.proceedToAccountValidation(stepper);
