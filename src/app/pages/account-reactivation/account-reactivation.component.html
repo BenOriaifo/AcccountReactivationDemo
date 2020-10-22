@@ -1788,7 +1788,7 @@
       </mat-progress-bar>
     </section>
     <div style="text-align: center" class="center-div">
-      <button
+      <!--<button
         style="
           color: #ffffff;
           background-color: #113998;
@@ -1800,6 +1800,20 @@
         mat-button
         [disabled]="corporateAccountDetailsForm.invalid"
         (click)="moveToSavingsAccount(stepper)"
+      >
+        Submit
+      </button>-->
+      <button
+        style="
+          color: #ffffff;
+          background-color: #113998;
+          width: 100% !important;
+          height: 50 px;
+          text-transform: uppercase;
+        "
+        [ngClass]="{ disabled: corporateAccountDetailsForm.invalid }"
+        mat-button
+        [disabled]="corporateAccountDetailsForm.invalid"
       >
         Submit
       </button>
