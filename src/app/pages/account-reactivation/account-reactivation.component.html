@@ -1016,6 +1016,19 @@
                   </mat-form-field>
                 </div>
                 <div class="w-100">
+                  changes
+                  <mat-form-field appearance="fill">
+                    <mat-label>Income</mat-label>
+                    <select
+                      matNativeControl
+                      placeholder="Please select a pick up branch"
+                    >
+                      <option value="Employed">Income</option>
+                      <option value="Unemployed">Banker</option>
+                    </select>
+                  </mat-form-field>
+                </div>
+                <div class="w-100">
                   <button
                     style="
                       color: #ffffff;
@@ -1033,7 +1046,465 @@
               </div>
             </div>
             <div *ngIf="savings == 'no'">
-              <form [formGroup]="accountDetailsFormGroup">
+              <div [formGroup]="accountDetailsFormGroup">
+                <p>Provide details of your account</p>
+                <div class="w-100">
+                  <!-- *ngIf="bvnLength < 10" -->
+
+                  <mat-form-field appearance="fill" class="w-50">
+                    <mat-label>BVN</mat-label>
+                    <input
+                      matInput
+                      autocomplete="off"
+                      maxlength="11"
+                      minlength="11"
+                      placeholder="Enter BVN"
+                      formControlName="bvnCtrl"
+                      type="text"
+                      required
+                    />
+                    <mat-hint align="end">Max 11 characters</mat-hint>
+                    <mat-error
+                      *ngIf="
+                        accountDetailsFormGroup
+                          .get('bvnCtrl')
+                          .hasError('required')
+                      "
+                    >
+                      BVN is required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field
+                    *ngIf="bvnLength > 10"
+                    appearance="fill"
+                    class="w-50"
+                  >
+                    <mat-label>BVN</mat-label>
+                    <input
+                      matInput
+                      [value]="maskedBVN"
+                      disabled
+                      type="text"
+                      required
+                    />
+                    <mat-hint align="end">Max 11 characters</mat-hint>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" class="w-50">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput [value]="phoneNo" type="text" />
+                  </mat-form-field>
+                </div>
+                <div class="w-100">
+                  <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input matInput [value]="" />
+                  </mat-form-field>
+                </div>
+                <div style="margin: 8px">
+                  <p>Address</p>
+                </div>
+                <div class="w-100 inline-block">
+                  <div class="w-100">
+                    <mat-form-field appearance="fill" class="w-50">
+                      <mat-label>House No</mat-label>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        maxlength=""
+                        minlength=""
+                        placeholder="Enter your house number"
+                        formControlName="houseNo"
+                        type="text"
+                        required
+                      />
+                      <mat-hint align="end">e.g 2, 2A, House 2, etc</mat-hint>
+                      <mat-error
+                        *ngIf="
+                          accountDetailsFormGroup
+                            .get('houseNo')
+                            .hasError('required')
+                        "
+                      >
+                        House No is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="w-100">
+                    <mat-form-field appearance="fill" class="w-50">
+                      <mat-label>Street</mat-label>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        maxlength=""
+                        minlength=""
+                        placeholder="Enter your street"
+                        formControlName="streetCtrl"
+                        type="text"
+                        required
+                      />
+                      <mat-error
+                        *ngIf="
+                          accountDetailsFormGroup
+                            .get('streetCtrl')
+                            .hasError('required')
+                        "
+                      >
+                        Street is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="w-100 inline-block">
+                  <div class="w-100">
+                    <mat-form-field appearance="fill" class="w-50">
+                      <mat-label>City</mat-label>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        maxlength=""
+                        minlength=""
+                        placeholder="Enter your city"
+                        formControlName="cityCtrl"
+                        type="text"
+                        required
+                      />
+                      <mat-error
+                        *ngIf="
+                          accountDetailsFormGroup
+                            .get('cityCtrl')
+                            .hasError('required')
+                        "
+                      >
+                        City is required
+                      </mat-error>
+                      <mat-hint align="end">e.g Surulere, Lekki</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="w-100">
+                    <mat-form-field appearance="fill" class="w-50">
+                      <mat-label>State</mat-label>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        maxlength=""
+                        minlength=""
+                        placeholder="Enter your state"
+                        formControlName="stateCtrl"
+                        type="text"
+                        required
+                      />
+                      <mat-error
+                        *ngIf="
+                          accountDetailsFormGroup
+                            .get('stateCtrl')
+                            .hasError('required')
+                        "
+                      >
+                        State is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <h5
+                    style="
+                      background-color: rgba(17, 57, 152, 0.16);
+                      font-weight: lighter;
+                      padding: 20px !important;
+                      font-size: medium;
+                    "
+                  >
+                    <div style="text-align: left !important">
+                      Please note that you are required to upload a signature on
+                      a plain piece of white paper <br />
+                      <b>Note : </b>You are required to upload as an image
+                    </div>
+                  </h5>
+                </div>
+                <label for="">Please select additional service required</label>
+                <div
+                  *ngFor="let service of additionalServices"
+                  style="padding: 8px !important; width: 49%; display: block"
+                >
+                  <mat-checkbox
+                    (change)="onChange(service, $event)"
+                    color="primary"
+                  >
+                    {{ service }}
+                  </mat-checkbox>
+                </div>
+                <div>
+                  <div class="w-100">
+                    <mat-form-field appearance="fill" class="w-50">
+                      <mat-label>Preferred Name on the card</mat-label>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        maxlength="21"
+                        minlength=""
+                        placeholder="Enter your preferred name"
+                        formControlName="debitCardNameCtrl"
+                        type="text"
+                      />
+                      <mat-error
+                        *ngIf="
+                          accountDetailsFormGroup.get('debitCardNameCtrl')
+                            .errors
+                        "
+                      >
+                        Preferred name should contain texts only
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="w-100">
+                    <mat-form-field appearance="fill" class="w-50">
+                      <mat-label>Preferred Pick up branch</mat-label>
+                      <select
+                        matNativeControl
+                        placeholder="Please select a pick up branch"
+                        style="padding: 0 10px"
+                      >
+                        <option
+                          (click)="onSelect(opt)"
+                          *ngFor="let opt of bankList"
+                          [value]="opt"
+                        >
+                          {{ opt.Branch_Name }}
+                        </option>
+                      </select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <mat-form-field class="w-100">
+                  <mat-label>Select an ID type to upload </mat-label>
+                  <select
+                    matNativeControl
+                    placeholder="Please select a pick up branch"
+                    style="padding: 0 10px"
+                  >
+                    <option
+                      (click)="onSelectIdentification(identification)"
+                      *ngFor="let identification of identificationOptions"
+                      [value]="identification"
+                    >
+                      {{ identification }}
+                    </option>
+                  </select>
+                </mat-form-field>
+                <div>
+                  <h4>Please upload your {{ identificationSelected }}</h4>
+
+                  <div
+                    class="align-left upload-cont"
+                    style="padding: 13px !important"
+                  >
+                    <label
+                      for="file-upload"
+                      class="custom-file-upload"
+                      (click)="fileInput.click()"
+                      >Choose File
+                    </label>
+
+                    <input
+                      hidden
+                      accept="image/jpg,image/png,image/jpeg,application/pdf"
+                      (change)="onFileSelected($event, 'Identification')"
+                      #fileInput
+                      type="file"
+                      formContolName="fileInputCtrl"
+                      id="file"
+                    />
+                  </div>
+                  <div *ngIf="fileResult" class="selected-file">
+                    <label class="file-text" for="">
+                      {{ fileResult }}
+                      <img
+                        style="margin-left: 10px"
+                        src="../../../assets/images/Group773.png"
+                        height="15"
+                        width="15"
+                      />
+                    </label>
+
+                    <mat-icon
+                      class="cancel-icn"
+                      (click)="removeSelectedFile('Identification')"
+                      >cancel</mat-icon
+                    >
+                  </div>
+                  <div class="fileError-cls">
+                    {{ _fileError }}
+                  </div>
+                </div>
+                <div *ngIf="fileResult">
+                  <h5>
+                    Please enter the unique id number attached to your
+                    {{ identificationSelected }}
+                  </h5>
+                </div>
+                <mat-form-field
+                  *ngIf="fileResult"
+                  appearance="fill"
+                  class="w-100"
+                >
+                  <mat-label>
+                    Please enter the ID number attached to your
+                    {{ identificationSelected }}</mat-label
+                  >
+                  <input
+                    matInput
+                    autocomplete="off"
+                    maxlength="30"
+                    minlength="2"
+                    formControlName="identificationIDCtrl"
+                    required
+                  />
+                  <mat-hint align="end">Max 30 characters</mat-hint>
+                  <mat-error
+                    *ngIf="
+                      accountDetailsFormGroup
+                        .get('identificationIDCtrl')
+                        .hasError('required')
+                    "
+                  >
+                    ID is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div>
+                <h4>Please upload a proof of utility bill (Optional)</h4>
+
+                <div
+                  class="align-left upload-cont"
+                  style="padding: 13px !important"
+                >
+                  <label
+                    for="file-upload"
+                    class="custom-file-upload"
+                    (click)="utilityInput.click()"
+                    >Choose File
+                  </label>
+
+                  <input
+                    hidden
+                    accept="image/jpg,image/png,image/jpeg,application/pdf"
+                    (change)="onFileSelected($event, 'Utility Bill')"
+                    #utilityInput
+                    type="file"
+                    formContolName="utililtyBillCtrl"
+                    id="file"
+                  />
+                </div>
+                <div *ngIf="utililtyBill" class="selected-file">
+                  <label class="file-text" for="">
+                    {{ utililtyBill }}
+                    <img
+                      style="margin-left: 10px"
+                      src="../../../assets/images/Group773.png"
+                      height="15"
+                      width="15"
+                    />
+                  </label>
+
+                  <mat-icon
+                    class="cancel-icn"
+                    (click)="removeSelectedFile('Utility Bill')"
+                    >cancel</mat-icon
+                  >
+                </div>
+                <div class="fileError-cls">
+                  {{ _utilityFileError }}
+                </div>
+              </div>
+
+              <div>
+                <h4>Please upload signature</h4>
+
+                <div
+                  class="align-left upload-cont"
+                  style="padding: 13px !important"
+                >
+                  <label
+                    for="file-upload"
+                    class="custom-file-upload"
+                    (click)="signatureFileInput.click()"
+                    >Choose File
+                  </label>
+
+                  <input
+                    hidden
+                    accept="image/jpg,image/png,image/jpeg,application/pdf"
+                    (change)="onFileSelected($event, 'Signature')"
+                    #signatureFileInput
+                    type="file"
+                    formContolName="signature"
+                    id="signatureFileInput"
+                  />
+                </div>
+                <div *ngIf="signatureFile" class="selected-file">
+                  <label class="file-text" for="">
+                    {{ signatureFile }}
+                    <img
+                      style="margin-left: 10px"
+                      src="../../../assets/images/Group773.png"
+                      height="15"
+                      width="15"
+                    />
+                  </label>
+
+                  <mat-icon
+                    class="cancel-icn"
+                    (click)="removeSelectedFile('Signature')"
+                    >cancel</mat-icon
+                  >
+                </div>
+                <div class="fileError-cls">
+                  {{ signatureFileError }}
+                </div>
+              </div>
+              <section *ngIf="detailFormSpinner">
+                <mat-progress-bar
+                  class="example-margin"
+                  [color]="color"
+                  [mode]="mode"
+                  [value]="value"
+                  [bufferValue]="bufferValue"
+                >
+                </mat-progress-bar>
+              </section>
+
+              <div style="text-align: center" class="center-div">
+                <button
+                  style="
+                    margin-right: 20px !important;
+                    background-color: rgba(3, 150, 253, 0.16);
+                    text-transform: uppercase;
+                    color: #0396fd;
+                    width: 40% !important;
+                    height: 50px;
+                  "
+                  mat-button
+                  matStepperPrevious
+                >
+                  Back
+                </button>
+                <button
+                  style="
+                    color: #ffffff;
+                    background-color: #113998;
+                    width: 40% !important;
+                    height: 50 px;
+                    text-transform: uppercase;
+                  "
+                  [ngClass]="{ disabled: validateStepper() }"
+                  mat-button
+                  [disabled]="validateStepper()"
+                  (click)="proceedToAccountValidation(stepper)"
+                >
+                  Confirm Request
+                </button>
+              </div>
+              <!-- <form [formGroup]="accountDetailsFormGroup">
                 <ng-template matStepLabel>
                   Provide details of your account</ng-template
                 >
@@ -1135,7 +1606,6 @@
                         type="text"
                         required
                       />
-                      <!-- <mat-hint align="end">Max 11 characters</mat-hint> -->
                       <mat-error
                         *ngIf="
                           accountDetailsFormGroup
@@ -1498,7 +1968,7 @@
                     Confirm Request
                   </button>
                 </div>
-              </form>
+              </form> -->
             </div>
           </div>
         </div>
