@@ -279,3 +279,8 @@ ul {
   height: 20px;
   width: 40px;
 }
+a {
+  color: black !important;
+  text-decoration: underline;
+  outline: none;
+}
