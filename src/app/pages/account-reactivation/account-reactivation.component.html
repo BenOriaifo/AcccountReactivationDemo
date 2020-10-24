@@ -285,11 +285,11 @@
           <button
             mat-flat-button
             class="big-buttonStyles"
-            (click)="moveToStepper(stepper)"
+            (click)="closeTermsAndOpenAction()"
             [ngClass]="{ disabled: accountFormGroup.invalid }"
             [disabled]="accountFormGroup.invalid"
           >
-            Proceed
+            Reactivate
           </button>
           <!-- [disabled]="accountFormGroup.invalid" -->
           <div class="float-right"></div>
@@ -569,7 +569,7 @@
               </mat-select>
             </mat-form-field>
             <div *ngIf="identificationSelected">
-              <h4>Please upload your {{ identificationSelected }}</h4>
+              <h4>Please upload your Id Card</h4>
 
               <div
                 class="align-left upload-cont"
@@ -774,7 +774,7 @@
               [disabled]="validateStepper()"
               (click)="proceedToAccountValidation(stepper)"
             >
-              Reactive Account
+              Save and Contiune
             </button>
           </div>
         </form>
@@ -887,6 +887,17 @@
                 <p>NO</p>
               </div>
             </div>
+            <!-- <button
+              style="
+                color: #ffffff;
+                background-color: #113998;
+                width: 100%;
+                text-transform: uppercase;
+              "
+              mat-button
+            >
+              Save and continue
+            </button> -->
             <div class="w-100" *ngIf="savings == 'yes'">
               <p><b>Saving Account Form</b></p>
               <div>
@@ -1040,7 +1051,7 @@
                     mat-button
                     (click)="moveToStepper(stepper)"
                   >
-                    Submit
+                    Save and contiune
                   </button>
                 </div>
               </div>
@@ -1300,7 +1311,37 @@
                   </select>
                 </mat-form-field>
                 <div>
-                  <h4>Please upload your {{ identificationSelected }}</h4>
+                  <h5>
+                    Please enter the unique id number attached to your
+                    {{ identificationSelected }}
+                  </h5>
+                </div>
+                <mat-form-field appearance="fill" class="w-100">
+                  <mat-label>
+                    Please enter the ID number attached to your
+                    {{ identificationSelected }}</mat-label
+                  >
+                  <input
+                    matInput
+                    autocomplete="off"
+                    maxlength="30"
+                    minlength="2"
+                    formControlName="identificationIDCtrl"
+                    required
+                  />
+                  <mat-hint align="end">Max 30 characters</mat-hint>
+                  <mat-error
+                    *ngIf="
+                      accountDetailsFormGroup
+                        .get('identificationIDCtrl')
+                        .hasError('required')
+                    "
+                  >
+                    ID is required
+                  </mat-error>
+                </mat-form-field>
+                <div>
+                  <h4>Please upload your Id</h4>
 
                   <div
                     class="align-left upload-cont"
@@ -1344,40 +1385,6 @@
                     {{ _fileError }}
                   </div>
                 </div>
-                <div *ngIf="fileResult">
-                  <h5>
-                    Please enter the unique id number attached to your
-                    {{ identificationSelected }}
-                  </h5>
-                </div>
-                <mat-form-field
-                  *ngIf="fileResult"
-                  appearance="fill"
-                  class="w-100"
-                >
-                  <mat-label>
-                    Please enter the ID number attached to your
-                    {{ identificationSelected }}</mat-label
-                  >
-                  <input
-                    matInput
-                    autocomplete="off"
-                    maxlength="30"
-                    minlength="2"
-                    formControlName="identificationIDCtrl"
-                    required
-                  />
-                  <mat-hint align="end">Max 30 characters</mat-hint>
-                  <mat-error
-                    *ngIf="
-                      accountDetailsFormGroup
-                        .get('identificationIDCtrl')
-                        .hasError('required')
-                    "
-                  >
-                    ID is required
-                  </mat-error>
-                </mat-form-field>
               </div>
               <div>
                 <h4>Please upload a proof of utility bill (Optional)</h4>
@@ -1504,12 +1511,10 @@
                     height: 50 px;
                     text-transform: uppercase;
                   "
-                  [ngClass]="{ disabled: validateStepper() }"
                   mat-button
-                  [disabled]="validateStepper()"
                   (click)="proceedToAccountValidation(stepper)"
                 >
-                  Confirm Request
+                  Save and contiune
                 </button>
               </div>
               <!-- <form [formGroup]="accountDetailsFormGroup">
@@ -1983,8 +1988,10 @@
       </mat-step>
 
       <mat-step [stepControl]="corporateAccountDetailsForm">
+        <ng-template matStepLabel>Coporate Account Form</ng-template>
+
         <div>
-          <p><b>Coporate Account Form</b></p>
+          <p><b></b></p>
           <form>
             <div
               class="align-left upload-cont"
@@ -2152,9 +2159,9 @@
                 [ngClass]="{ disabled: corporateAccountDetailsForm.invalid }"
                 mat-button
                 [disabled]="corporateAccountDetailsForm.invalid"
-                (click)="moveToSavingsAccount(stepper)"
+                (click)="proceedToAccountValidation(stepper)"
               >
-                Submit
+                Save and Contiune
               </button>
             </div>
           </form>
