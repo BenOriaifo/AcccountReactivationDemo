@@ -326,7 +326,7 @@ export class AccountReactivationComponent implements OnInit {
       console.log(result);
     });
   }
-  moveToCorporateAccount() {
+  moveToCorporateAccount(stepper) {
     this.closeDialogModal();
     this.corporateAccount();
   }
