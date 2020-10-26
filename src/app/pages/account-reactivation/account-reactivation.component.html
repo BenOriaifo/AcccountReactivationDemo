@@ -204,15 +204,15 @@
       Account Reactivation
     </h2>
 
-    <h3 *ngIf="isAccountStepperActive" class="stepper-header">
+    <!-- <h3 *ngIf="isAccountStepperActive" class="stepper-header">
       Account Validation
-    </h3>
+    </h3> -->
 
-    <h3 *ngIf="isDetailFormActive" class="stepper-header">
+    <!-- <h3 *ngIf="isDetailFormActive" class="stepper-header">
       Provide details of your account
-    </h3>
+    </h3> -->
 
-    <h3 *ngIf="isVerifyFormActive" class="stepper-header">Verify OTP</h3>
+    <!-- <h3 *ngIf="isVerifyFormActive" class="stepper-header">Verify OTP</h3> -->
     <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
       <mat-step [stepControl]="accountFormGroup">
         <form
@@ -1512,7 +1512,7 @@
                     text-transform: uppercase;
                   "
                   mat-button
-                  (click)="proceedToAccountValidation(stepper)"
+                  (click)="moveToCorporateAccount(stepper)"
                 >
                   Save and contiune
                 </button>
@@ -2417,7 +2417,7 @@
             class="big-buttonStyles"
             [ngClass]="{ primary: class == 'primary' }"
             [disabled]="isAwaitingResponse"
-            (click)="proceedToAccountValidation(stepper)"
+            (click)="validateOTP(stepper)"
           >
             Save and Contiune
           </button>
