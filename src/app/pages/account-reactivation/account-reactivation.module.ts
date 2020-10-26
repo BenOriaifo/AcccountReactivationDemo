@@ -24,7 +24,7 @@ const routes: Routes = [
     MatFormFieldModule,
   ],
   exports: [],
-  declarations: [],
+  declarations: [AccountReactivationComponent],
   providers: [],
 })
 export class AccountReactivationModule {}
