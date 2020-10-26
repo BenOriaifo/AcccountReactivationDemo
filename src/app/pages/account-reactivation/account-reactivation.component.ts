@@ -277,6 +277,7 @@ export class AccountReactivationComponent implements OnInit {
     console.log(this.atmPickUpBranch);
   }
   onChange(service, evt) {
+    console.log(service, evt);
     this.additionalServiceFormArray = this.accountDetailsFormGroup.controls
       .additionalServiceCtrl as FormArray;
     if (evt.checked === true) {

@@ -1252,7 +1252,7 @@
                     {{ service }}
                   </mat-checkbox>
                 </div>
-                <div>
+                <div *ngIf="additionaServiceSelected.includes('Debit card')">
                   <div class="w-100">
                     <mat-form-field appearance="fill" class="w-50">
                       <mat-label>Preferred Name on the card</mat-label>
