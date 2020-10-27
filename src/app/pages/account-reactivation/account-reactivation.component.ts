@@ -1240,4 +1240,8 @@ export class AccountReactivationComponent implements OnInit {
     }
     console.log(this.documents, 'documents');
   }
+
+  openDialog(){
+    console.log(this.termsAndConditionModalTemplate);
+  }
 }
