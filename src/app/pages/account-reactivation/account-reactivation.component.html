@@ -826,36 +826,8 @@
                 <p>NO</p>
               </div>
             </div>
-            <div *ngIf="option == 'yes'">
-              <p><b>Download reference letter</b></p>
-            </div>
-            <div
-              class="w-100 flex"
-              style="padding: 13px !important; margin-top: 15px !important"
-            >
-              <button
-                *ngIf="option == 'yes'"
-                mat-flat-button
-                class="big-buttonStyles white"
-                (click)="moveToCorporateAccount(stepper)"
-              >
-                Download Reference Letter
-              </button>
-              <button
-                style="
-                  color: #ffffff;
-                  background-color: #113998;
-                  width: 100%;
-                  text-transform: uppercase;
-                "
-                mat-button
-                (click)="savingsAccount()"
-              >
-                Save and continue
-              </button>
-            </div>
           </div>
-          <div class="w-100" *ngIf="isSavings">
+          <div class="w-100" *ngIf="option == 'yes'">
             <p>
               <b
                 >Do you want to continue using this salary account or close
@@ -872,6 +844,7 @@
                   [(ngModel)]="savings"
                   id="option"
                   class="radio"
+                  (click)="savingsAccount()"
                 />
                 <p>YES</p>
               </div>
@@ -883,6 +856,7 @@
                   [(ngModel)]="savings"
                   id="option"
                   class="radio"
+                  (click)="savingsAccount()"
                 />
                 <p>NO</p>
               </div>
@@ -1252,7 +1226,7 @@
                     {{ service }}
                   </mat-checkbox>
                 </div>
-                <div>
+                <div *ngIf="additionaServiceSelected.includes('Debit card')">
                   <div class="w-100">
                     <mat-form-field appearance="fill" class="w-50">
                       <mat-label>Preferred Name on the card</mat-label>
@@ -1512,7 +1486,7 @@
                     text-transform: uppercase;
                   "
                   mat-button
-                  (click)="proceedToAccountValidation(stepper)"
+                  (click)="moveToCorporateAccount(stepper)"
                 >
                   Save and contiune
                 </button>
@@ -1984,6 +1958,35 @@
               </form> -->
             </div>
           </div>
+          <div *ngIf="option == 'yes' && !isSavings">
+            <p><b>Download reference letter</b></p>
+          </div>
+          <div
+            class="w-100 flex"
+            style="padding: 13px !important; margin-top: 15px !important"
+          >
+            <button
+              *ngIf="option == 'yes' && !isSavings"
+              mat-flat-button
+              class="big-buttonStyles white"
+              (click)="moveToCorporateAccount(stepper)"
+            >
+              Download Reference Letter
+            </button>
+            <button
+              style="
+                color: #ffffff;
+                background-color: #113998;
+                width: 100%;
+                text-transform: uppercase;
+              "
+              *ngIf="!isSavings"
+              mat-button
+              (click)="savingsAccount()"
+            >
+              Save and continue
+            </button>
+          </div>
         </div>
       </mat-step>
 
@@ -2417,7 +2420,7 @@
             class="big-buttonStyles"
             [ngClass]="{ primary: class == 'primary' }"
             [disabled]="isAwaitingResponse"
-            (click)="proceedToAccountValidation(stepper)"
+            (click)="validateOTP(stepper)"
           >
             Save and Contiune
           </button>

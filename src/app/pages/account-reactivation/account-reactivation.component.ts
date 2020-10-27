@@ -277,6 +277,7 @@ export class AccountReactivationComponent implements OnInit {
     console.log(this.atmPickUpBranch);
   }
   onChange(service, evt) {
+    console.log(service, evt);
     this.additionalServiceFormArray = this.accountDetailsFormGroup.controls
       .additionalServiceCtrl as FormArray;
     if (evt.checked === true) {
@@ -327,8 +328,10 @@ export class AccountReactivationComponent implements OnInit {
     });
   }
   moveToCorporateAccount(stepper) {
-    this.closeDialogModal();
-    this.corporateAccount();
+    this.proceedToAccountValidation(stepper);
+    this.isDetailFormActive = true;
+    // this.closeDialogModal();
+    // this.corporateAccount();
   }
   moveToSavingsAccount() {
     this.closeDialogModal();
@@ -553,47 +556,49 @@ export class AccountReactivationComponent implements OnInit {
     );
   }
   validateOTP(stepper: MatStepper) {
-    const payload = {
-      otp: this.otpForm.controls.otpControl.value,
-      otpRefence: this.otpReference,
-      accountNumber: this.acctNo,
-    };
-    this.showSpinner = true;
-    this.disableOTPForm = true;
-    this.acctReactivationService.validateOTP(payload).subscribe(
-      (response) => {
-        // response.ResponseCode ==='00';
-        if (response.ResponseCode === '00') {
-          this._snackBar.open('OTP Validated Successfully', 'OK', {
-            verticalPosition: 'top',
-            horizontalPosition: 'center',
-            duration: 5000,
-            panelClass: ['errorSnackbar'],
-          });
+    this.isVerifyFormActive = true;
+    this.proceedToAccountValidation(stepper);
+    // const payload = {
+    //   otp: this.otpForm.controls.otpControl.value,
+    //   otpRefence: this.otpReference,
+    //   accountNumber: this.acctNo,
+    // };
+    // this.showSpinner = true;
+    // this.disableOTPForm = true;
+    // this.acctReactivationService.validateOTP(payload).subscribe(
+    //   (response) => {
+    //     // response.ResponseCode ==='00';
+    //     if (response.ResponseCode === '00') {
+    //       this._snackBar.open('OTP Validated Successfully', 'OK', {
+    //         verticalPosition: 'top',
+    //         horizontalPosition: 'center',
+    //         duration: 5000,
+    //         panelClass: ['errorSnackbar'],
+    //       });
 
-          this.InitiateRequest(stepper);
-        } else {
-          //this.showSpinner = false;
-          this._snackBar.open('OTP Validated failed', 'Failed', {
-            verticalPosition: 'top',
-            horizontalPosition: 'center',
-            duration: 5000,
-            panelClass: ['errorSnackbar'],
-          });
-          this.disableOTPForm = false;
-          // this.InitiateRequest(stepper);
-        }
-      },
-      (err) => {
-        this.showSpinner = false;
-        this._snackBar.open('Error occured', 'Error', {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          duration: 5000,
-          panelClass: ['errorSnackbar'],
-        });
-      }
-    );
+    //       this.InitiateRequest(stepper);
+    //     } else {
+    //       //this.showSpinner = false;
+    //       this._snackBar.open('OTP Validated failed', 'Failed', {
+    //         verticalPosition: 'top',
+    //         horizontalPosition: 'center',
+    //         duration: 5000,
+    //         panelClass: ['errorSnackbar'],
+    //       });
+    //       this.disableOTPForm = false;
+    //       // this.InitiateRequest(stepper);
+    //     }
+    //   },
+    //   (err) => {
+    //     this.showSpinner = false;
+    //     this._snackBar.open('Error occured', 'Error', {
+    //       verticalPosition: 'top',
+    //       horizontalPosition: 'center',
+    //       duration: 5000,
+    //       panelClass: ['errorSnackbar'],
+    //     });
+    //   }
+    // );
   }
   buildRequestPayload() {
     const payload = {
