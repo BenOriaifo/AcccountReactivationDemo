@@ -271,6 +271,7 @@ export class AccountReactivationComponent implements OnInit {
   savingsAccount() {
     this.isSavings = true;
   }
+
   onSelect(opt) {
     console.log(opt);
     this.atmPickUpBranchSelected = opt;
