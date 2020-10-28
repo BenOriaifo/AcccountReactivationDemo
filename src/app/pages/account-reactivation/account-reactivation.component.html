@@ -839,14 +839,15 @@
               >
             </p>
             <p>NB: Funds would be transfered to your savings account</p>
-            <div class="w-100">
+            <div  class="selected-file">
+              <form style="padding-top: 8px !important;" [formGroup]="personalAccountForm">
               <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Select an ID type to upload </mat-label>
                 <mat-select
-                    formControlName="pickUpBranchCtrl"
+                    formControlName="selectCtrl"
                     placeholder="Continue operating a current account"
                   >
                     <mat-option
-                      (click)="savingsAccount()"
                       *ngFor="let opt of accountAction"
                       [value]="opt"
                     >
@@ -854,6 +855,7 @@
                     </mat-option>
                   </mat-select>
               </mat-form-field>
+            </form>
               <!-- <div class="flex" style="align-items: center">
                 <input
                   type="radio"
