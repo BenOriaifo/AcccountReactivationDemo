@@ -142,6 +142,7 @@ export class AccountReactivationComponent implements OnInit {
   bvnLength: number;
   selectedValue: string;
   isSavings = false;
+  showDownloadRefLetter: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -1261,10 +1262,10 @@ export class AccountReactivationComponent implements OnInit {
     console.log('Writer changed...');
     console.log(value);
     if(value === 'Continue operating a current account') {
-
+      this.showDownloadRefLetter = true;
     }
     else {
-
+      this.showDownloadRefLetter = false;
     }
 
     //this.filteredBooks = this.bookService.getBooksByWriter(this.writer.value.wid);
