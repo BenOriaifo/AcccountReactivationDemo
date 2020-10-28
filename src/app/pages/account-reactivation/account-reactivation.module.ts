@@ -5,12 +5,12 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { Routes, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AccountReactivationComponent } from './account-reactivation.component';
+//import { AccountReactivationComponent } from './account-reactivation.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AccountReactivationComponent,
+    //component: AccountReactivationComponent,
   },
 ];
 @NgModule({
@@ -24,7 +24,7 @@ const routes: Routes = [
     MatFormFieldModule,
   ],
   exports: [],
-  declarations: [AccountReactivationComponent],
+ // declarations: [AccountReactivationComponent],
   providers: [],
 })
 export class AccountReactivationModule {}

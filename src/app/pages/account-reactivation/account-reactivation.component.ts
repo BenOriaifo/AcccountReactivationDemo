@@ -18,6 +18,7 @@ import { AccountStatus } from 'src/app/core/models/payloads/account-status';
 import { UploadedDocument } from 'src/app/core/models/payloads/additional-acct-payload';
 import { PickupBranch } from 'src/app/core/models/payloads/atm-pickup-branch';
 import { _banksList } from 'src/app/core/models/banks_list';
+import { _acctAction } from 'src/app/core/models/payloads/AccountAction';
 
 @Component({
   selector: 'app-account-reactivation',
@@ -33,6 +34,7 @@ export class AccountReactivationComponent implements OnInit {
   accountDetailsFormGroup: FormGroup;
   corporateAccountDetailsForm: FormGroup;
   personalAccountForm: FormGroup;
+  reactivateDormantAccount: FormGroup;
   class = '';
   color = 'primary';
   mode = 'query';
@@ -122,6 +124,9 @@ export class AccountReactivationComponent implements OnInit {
   detailFormSpinner: boolean;
   atmPickUpBranchSelected: PickupBranch;
   directorSignatoryFileExt: string;
+  option;
+  savings;
+  ticket;
   isVerifyFormActive = false;
   isVerifyFormDone = false;
   isDetailFormActive = false;
@@ -129,8 +134,10 @@ export class AccountReactivationComponent implements OnInit {
   email: any;
   data: any;
   bankList = _banksList;
+  accountAction = _acctAction;
   maskedBVN: string;
   bvnLength: number;
+  isSavings = false;
   constructor(
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -143,8 +150,11 @@ export class AccountReactivationComponent implements OnInit {
     this.accountFormGroup = this.formBuilder.group({
       phoneNoCtrl: ['', Validators.required],
       accountNoCtrl: ['', Validators.required],
+      
     });
-    this.personalAccountForm = this.formBuilder.group({});
+    this.personalAccountForm = this.formBuilder.group({
+      selectCtrl: [''],
+    });
     this.accountDetailsFormGroup = this.formBuilder.group({
       bvnCtrl: ['', Validators.required],
       houseNo: ['', Validators.required],
@@ -170,6 +180,7 @@ export class AccountReactivationComponent implements OnInit {
     this.otpForm = this.formBuilder.group({
       otpControl: ['', Validators.required],
     });
+    // this.savingAccount();
     this.showTermsAndCondition();
     // this.showAccountActionModal();
     //this.loadBankPickUpBranches();
@@ -262,13 +273,16 @@ export class AccountReactivationComponent implements OnInit {
 
     return false;
   }
-
+  savingsAccount() {
+    this.isSavings = true;
+  }
   onSelect(opt) {
     console.log(opt);
     this.atmPickUpBranchSelected = opt;
     console.log(this.atmPickUpBranch);
   }
   onChange(service, evt) {
+    console.log(service, evt);
     this.additionalServiceFormArray = this.accountDetailsFormGroup.controls
       .additionalServiceCtrl as FormArray;
     if (evt.checked === true) {
@@ -286,7 +300,7 @@ export class AccountReactivationComponent implements OnInit {
     this.termsAndConditionModalRef = this.dialog.open(
       this.termsAndConditionModalTemplate,
       {
-        width: '800px',
+        width: '1200px',
         height: '600px',
         disableClose: true,
       }
@@ -310,17 +324,19 @@ export class AccountReactivationComponent implements OnInit {
   }
   showAccountActionModal() {
     this.accountActionRef = this.dialog.open(this.accountActionModal, {
-      width: '400px',
-      height: '200px',
+      width: '686px',
+      height: '320px',
       disableClose: true,
     });
     this.accountActionRef.afterClosed().subscribe((result) => {
       console.log(result);
     });
   }
-  moveToCorporateAccount() {
-    this.closeDialogModal();
-    this.corporateAccount();
+  moveToCorporateAccount(stepper) {
+    this.proceedToAccountValidation(stepper);
+    this.isDetailFormActive = true;
+    // this.closeDialogModal();
+    // this.corporateAccount();
   }
   moveToSavingsAccount() {
     this.closeDialogModal();
@@ -331,11 +347,11 @@ export class AccountReactivationComponent implements OnInit {
     this.proceedToAccountValidation(stepper);
   }
   personalAccount(stepper) {
-    this.personalAccountModalRef = this.dialog.open(this.personalAccountModal, {
-      width: '400px',
-      height: '200px',
-      disableClose: true,
-    });
+    // this.personalAccountModalRef = this.dialog.open(this.personalAccountModal, {
+    //   width: '400px',
+    //   height: '200px',
+    //   disableClose: true,
+    // });
   }
   reactivateAccount(stepper) {
     this.proceedToAccountValidation(stepper);
@@ -545,47 +561,49 @@ export class AccountReactivationComponent implements OnInit {
     );
   }
   validateOTP(stepper: MatStepper) {
-    const payload = {
-      otp: this.otpForm.controls.otpControl.value,
-      otpRefence: this.otpReference,
-      accountNumber: this.acctNo,
-    };
-    this.showSpinner = true;
-    this.disableOTPForm = true;
-    this.acctReactivationService.validateOTP(payload).subscribe(
-      (response) => {
-        // response.ResponseCode ==='00';
-        if (response.ResponseCode === '00') {
-          this._snackBar.open('OTP Validated Successfully', 'OK', {
-            verticalPosition: 'top',
-            horizontalPosition: 'center',
-            duration: 5000,
-            panelClass: ['errorSnackbar'],
-          });
+    this.isVerifyFormActive = true;
+    this.proceedToAccountValidation(stepper);
+    // const payload = {
+    //   otp: this.otpForm.controls.otpControl.value,
+    //   otpRefence: this.otpReference,
+    //   accountNumber: this.acctNo,
+    // };
+    // this.showSpinner = true;
+    // this.disableOTPForm = true;
+    // this.acctReactivationService.validateOTP(payload).subscribe(
+    //   (response) => {
+    //     // response.ResponseCode ==='00';
+    //     if (response.ResponseCode === '00') {
+    //       this._snackBar.open('OTP Validated Successfully', 'OK', {
+    //         verticalPosition: 'top',
+    //         horizontalPosition: 'center',
+    //         duration: 5000,
+    //         panelClass: ['errorSnackbar'],
+    //       });
 
-          this.InitiateRequest(stepper);
-        } else {
-          //this.showSpinner = false;
-          this._snackBar.open('OTP Validated failed', 'Failed', {
-            verticalPosition: 'top',
-            horizontalPosition: 'center',
-            duration: 5000,
-            panelClass: ['errorSnackbar'],
-          });
-          this.disableOTPForm = false;
-          // this.InitiateRequest(stepper);
-        }
-      },
-      (err) => {
-        this.showSpinner = false;
-        this._snackBar.open('Error occured', 'Error', {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          duration: 5000,
-          panelClass: ['errorSnackbar'],
-        });
-      }
-    );
+    //       this.InitiateRequest(stepper);
+    //     } else {
+    //       //this.showSpinner = false;
+    //       this._snackBar.open('OTP Validated failed', 'Failed', {
+    //         verticalPosition: 'top',
+    //         horizontalPosition: 'center',
+    //         duration: 5000,
+    //         panelClass: ['errorSnackbar'],
+    //       });
+    //       this.disableOTPForm = false;
+    //       // this.InitiateRequest(stepper);
+    //     }
+    //   },
+    //   (err) => {
+    //     this.showSpinner = false;
+    //     this._snackBar.open('Error occured', 'Error', {
+    //       verticalPosition: 'top',
+    //       horizontalPosition: 'center',
+    //       duration: 5000,
+    //       panelClass: ['errorSnackbar'],
+    //     });
+    //   }
+    // );
   }
   buildRequestPayload() {
     const payload = {
@@ -1226,5 +1244,9 @@ export class AccountReactivationComponent implements OnInit {
       this.documents.push(boardResolutionDocument);
     }
     console.log(this.documents, 'documents');
+  }
+
+  openDialog(){
+    console.log(this.termsAndConditionModalTemplate);
   }
 }

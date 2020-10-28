@@ -40,6 +40,9 @@ button {
   cursor: pointer;
   outline: none;
 }
+.disabled {
+  background-color: rgba(0, 0, 0, 0.12);
+}
 .lighter-small-button {
   width: 50%;
   height: 50px;
@@ -170,3 +173,6 @@ button {
   width: 90% !important;
   padding-left: 50px !important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
