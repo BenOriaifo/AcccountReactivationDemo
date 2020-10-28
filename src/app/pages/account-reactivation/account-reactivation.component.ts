@@ -152,8 +152,11 @@ export class AccountReactivationComponent implements OnInit {
     this.accountFormGroup = this.formBuilder.group({
       phoneNoCtrl: ['', Validators.required],
       accountNoCtrl: ['', Validators.required],
+      
     });
-    this.personalAccountForm = this.formBuilder.group({});
+    this.personalAccountForm = this.formBuilder.group({
+      selectCtrl: [''],
+    });
     this.accountDetailsFormGroup = this.formBuilder.group({
       bvnCtrl: ['', Validators.required],
       houseNo: ['', Validators.required],
