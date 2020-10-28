@@ -538,9 +538,8 @@
             <p>NB: Funds would be transfered to your savings account</p>
             <div class="selected-file">
               <form style="padding-top: 8px !important;" [formGroup]="personalAccountForm">
-                <mat-form-field appearance="fill" class="w-100">
-                  <mat-label></mat-label>
-                  <mat-select [(ngModel)]="selectedValue" name="action"
+                <mat-form-field class="w-100">
+                  <mat-select [(ngModel)]="selectedValue" class="select-dropdown"
                     placeholder="Continue operating a current account" formControlName="actions">
                     <mat-option *ngFor="let opt of accountAction" [value]="opt" 
                     (click)="onActionChange(opt.viewValue)">
