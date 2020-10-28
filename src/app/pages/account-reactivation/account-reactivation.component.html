@@ -839,8 +839,22 @@
               >
             </p>
             <p>NB: Funds would be transfered to your savings account</p>
-            <div class="flex">
-              <div class="flex" style="align-items: center">
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="w-100">
+                <mat-select
+                    formControlName="pickUpBranchCtrl"
+                    placeholder="Continue operating a current account"
+                  >
+                    <mat-option
+                      (click)="savingsAccount()"
+                      *ngFor="let opt of accountAction"
+                      [value]="opt"
+                    >
+                      {{ opt.value }}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <!-- <div class="flex" style="align-items: center">
                 <input
                   type="radio"
                   name="savings"
@@ -863,24 +877,12 @@
                   (click)="savingsAccount()"
                 />
                 <p>NO</p>
-              </div>
+              </div> -->
             </div>
 
             <!--<div class="w-100">
               <mat-form-field appearance="fill" class="w-50">
-                <mat-select
-                  formControlName="pickUpBranchCtrl"
-                  placeholder="Continue operating a current account"
-                >
-                  <mat-option
-                    (click)="savingsAccount()"
-                    *ngFor="let opt of accountAction"
-                    [value]="opt"
-                  >
-                    {{ opt.Branch_Name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+                
             </div>-->
           </div>
           <div>
@@ -1292,20 +1294,20 @@
                   </div>
                 </div>
                 <mat-form-field class="w-100">
-                  <mat-label>Select an ID type to upload </mat-label>
-                  <select
-                    matNativeControl
-                    placeholder="Please select a pick up branch"
-                    style="padding: 0 10px"
-                  >
-                    <option
-                      (click)="onSelectIdentification(identification)"
-                      *ngFor="let identification of identificationOptions"
-                      [value]="identification"
-                    >
-                      {{ identification }}
-                    </option>
-                  </select>
+                    <mat-label>Select an ID type to upload </mat-label>
+                      <select
+                        matNativeControl
+                        placeholder="Please select a pick up branch"
+                        style="padding: 0 10px"
+                      >
+                        <option
+                          (click)="onSelectIdentification(identification)"
+                          *ngFor="let identification of identificationOptions"
+                          [value]="identification"
+                        >
+                          {{ identification }}
+                        </option>
+                      </select>
                 </mat-form-field>
                 <div>
                   <h5>
