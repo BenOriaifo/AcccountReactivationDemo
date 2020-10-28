@@ -543,7 +543,7 @@
                   <mat-select [(ngModel)]="selectedValue" name="action"
                     placeholder="Continue operating a current account" formControlName="actions">
                     <mat-option *ngFor="let opt of accountAction" [value]="opt" 
-                    (click)="onActionChange(opt)">
+                    (click)="onActionChange(opt.viewValue)">
                       {{ opt.viewValue }}
                     </mat-option>
                   </mat-select>
@@ -2178,7 +2178,7 @@
         <input type="checkbox" name="" id="" />NO
       </div>
     </div> -->
-    <div class="w-100" style="padding: 13px !important; margin-top: 15px !important">
+    <div *ngIf="showDownloadRefLetter" class="w-100" style="padding: 13px !important; margin-top: 15px !important">
       <button mat-flat-button class="big-buttonStyles" (click)="moveToCorporateAccount(stepper)">
         Download Reference Letter
       </button>
