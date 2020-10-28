@@ -801,7 +801,7 @@
         <ng-template matStepLabel>Personal Account Reactivation</ng-template>
         <div>
           <div class="w-100" *ngIf="!isSavings">
-            <p><b>Is Account a salary Account?</b></p>
+            <p><b>Is/Was your account a salary account?</b></p>
             <div class="flex">
               <div class="flex" style="align-items: center">
                 <input
@@ -812,8 +812,9 @@
                   id="option"
                   class="radio"
                 />
-                <p>YES</p>
+                <p>Yes</p>
               </div>
+              
               <div class="flex" style="align-items: center">
                 <input
                   type="radio"
@@ -823,18 +824,21 @@
                   id="option"
                   class="radio"
                 />
-                <p>NO</p>
+                <p>No</p>
               </div>
+              <br/>
+            </div>
+            <div>
+                 <p>     For salary accounts, an introduction letter from your employer or two suitable references will be required.</p>
             </div>
           </div>
           <div class="w-100" *ngIf="option == 'yes'">
             <p>
               <b
-                >Do you want to continue using this salary account or close
-                salary account and open savings account?</b
+                >Would you like to continue operating a current account or close your existing account and open a savings account?                </b
               >
             </p>
-            <p>NB: Funds would be transfer to your savings account</p>
+            <p>NB: Funds would be transfered to your savings account</p>
             <div class="flex">
               <div class="flex" style="align-items: center">
                 <input
@@ -861,6 +865,25 @@
                 <p>NO</p>
               </div>
             </div>
+
+            <!--<div class="w-100">
+              <mat-form-field appearance="fill" class="w-50">
+                <mat-select
+                  formControlName="pickUpBranchCtrl"
+                  placeholder="Continue operating a current account"
+                >
+                  <mat-option
+                    (click)="savingsAccount()"
+                    *ngFor="let opt of accountAction"
+                    [value]="opt"
+                  >
+                    {{ opt.Branch_Name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>-->
+          </div>
+          <div>
             <!-- <button
               style="
                 color: #ffffff;

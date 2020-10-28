@@ -18,6 +18,7 @@ import { AccountStatus } from 'src/app/core/models/payloads/account-status';
 import { UploadedDocument } from 'src/app/core/models/payloads/additional-acct-payload';
 import { PickupBranch } from 'src/app/core/models/payloads/atm-pickup-branch';
 import { _banksList } from 'src/app/core/models/banks_list';
+import { _acctAction } from 'src/app/core/models/payloads/AccountAction';
 
 @Component({
   selector: 'app-account-reactivation',
@@ -133,6 +134,7 @@ export class AccountReactivationComponent implements OnInit {
   email: any;
   data: any;
   bankList = _banksList;
+  accountAction = _acctAction;
   maskedBVN: string;
   bvnLength: number;
   isSavings = false;
