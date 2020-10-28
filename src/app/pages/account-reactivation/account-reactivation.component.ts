@@ -19,6 +19,8 @@ import { UploadedDocument } from 'src/app/core/models/payloads/additional-acct-p
 import { PickupBranch } from 'src/app/core/models/payloads/atm-pickup-branch';
 import { _banksList } from 'src/app/core/models/banks_list';
 import { _acctAction } from 'src/app/core/models/payloads/AccountAction';
+import { MatSelectChange } from '@angular/material/select';
+
 
 @Component({
   selector: 'app-account-reactivation',
@@ -273,6 +275,11 @@ export class AccountReactivationComponent implements OnInit {
   savingsAccount() {
     this.isSavings = true;
   }
+
+  //change from Sam
+  changeRatio(event: MatSelectChange) {
+    console.log('Value of selected '+event.value);
+    }
   onSelect(opt) {
     console.log(opt);
     this.atmPickUpBranchSelected = opt;

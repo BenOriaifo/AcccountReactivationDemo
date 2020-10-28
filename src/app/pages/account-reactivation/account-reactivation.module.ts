@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 //import { AccountReactivationComponent } from './account-reactivation.component';
+import {MatSelectModule} from '@angular/material/select';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     MatInputModule,
     MaterialModule,
     MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [],
  // declarations: [AccountReactivationComponent],
