@@ -49,6 +49,9 @@ export class AccountReactivationComponent implements OnInit {
     "Nigeria Driver's Licence",
     'Nigerian International Passport',
   ];
+  actionFormBuilder = this.formBuilder.group({
+    actions: [null, Validators.required]
+  });
   public termsAndConditionModalRef: MatDialogRef<any>;
   public accountActionRef: MatDialogRef<any>;
   public reactivateAccountModalRef: MatDialogRef<any>;
@@ -137,6 +140,7 @@ export class AccountReactivationComponent implements OnInit {
   accountAction = _acctAction;
   maskedBVN: string;
   bvnLength: number;
+  selectedValue: string;
   isSavings = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -216,7 +220,10 @@ export class AccountReactivationComponent implements OnInit {
   get preferredName() {
     return this.accountDetailsFormGroup.controls.debitCardNameCtrl.value;
   }
-
+  
+  get actions() {
+    return this.actionFormBuilder.get('actions');
+  }
   maskEmailAddress(emailAddress: string) {
     if (emailAddress) {
       let maskid = '';
@@ -1248,5 +1255,18 @@ export class AccountReactivationComponent implements OnInit {
 
   openDialog(){
     console.log(this.termsAndConditionModalTemplate);
+  }
+
+  onActionChange(value) {
+    console.log('Writer changed...');
+    console.log(value);
+    if(value === 'Continue operating a current account') {
+
+    }
+    else {
+
+    }
+
+    //this.filteredBooks = this.bookService.getBooksByWriter(this.writer.value.wid);
   }
 }
