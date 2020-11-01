@@ -34,6 +34,7 @@ export class AccountReactivationComponent implements OnInit {
   accountFormGroup: FormGroup;
   otpForm: FormGroup;
   accountDetailsFormGroup: FormGroup;
+  accountClosureFormGroup: FormGroup;
   corporateAccountDetailsForm: FormGroup;
   personalAccountForm: FormGroup;
   reactivateDormantAccount: FormGroup;
@@ -129,7 +130,7 @@ export class AccountReactivationComponent implements OnInit {
   detailFormSpinner: boolean;
   atmPickUpBranchSelected: PickupBranch;
   directorSignatoryFileExt: string;
-  option;
+  option = '';
   savings;
   ticket;
   isVerifyFormActive = false;
@@ -142,9 +143,10 @@ export class AccountReactivationComponent implements OnInit {
   accountAction = _acctAction;
   maskedBVN: string;
   bvnLength: number;
-  selectedValue: string;
+  selectedValue: number;
   isSavings = false;
-  showDownloadRefLetter: boolean = false;
+  showAccountContinueForm = false;
+  showAccountClosureForm = false;
   constructor(
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -161,6 +163,7 @@ export class AccountReactivationComponent implements OnInit {
     });
     this.personalAccountForm = this.formBuilder.group({
       selectCtrl: [''],
+      actions: ['', Validators.required]
     });
     this.accountDetailsFormGroup = this.formBuilder.group({
       bvnCtrl: ['', Validators.required],
@@ -178,6 +181,23 @@ export class AccountReactivationComponent implements OnInit {
       utililtyBillCtrl: [''],
       signature: ['', Validators.required],
     });
+
+    this.accountClosureFormGroup = this.formBuilder.group({
+      branchName: ['', Validators.required],
+      nokDetails: ['', Validators.required],
+      nokFullName: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      address: ['', Validators.required],
+      // additionalServiceCtrl: new FormArray([]),
+      gender: ['', Validators.required],
+      emailAddress: ['', Validators.required],
+      phoneNumber: ['', Validators.pattern(/^[0-9]*$/)],
+      employmentStatus: '',
+      occupation: '',
+      income: '',
+      // signature: ['', Validators.required],
+    });
+
     this.corporateAccountDetailsForm = this.formBuilder.group({
       IntroLetter: ['', [Validators.required]],
       // DirectorsID: ['', [Validators.required]],
@@ -336,6 +356,18 @@ export class AccountReactivationComponent implements OnInit {
     this.isAccountStepperActive = true;
     this.isAccountStepperDone = false;
     stepper.next();
+  }
+
+  proceedToSignatureUpload(stepper: MatStepper) {
+    this.isAccountStepperActive = true;
+    this.isAccountStepperDone = false;
+    stepper.next();
+  }
+
+ goBackToAccountValidation(stepper: MatStepper) {
+    this.isAccountStepperActive = true;
+    this.isAccountStepperDone = false;
+    stepper.previous();
   }
   showAccountActionModal() {
     this.accountActionRef = this.dialog.open(this.accountActionModal, {
@@ -1265,16 +1297,29 @@ export class AccountReactivationComponent implements OnInit {
     console.log(this.termsAndConditionModalTemplate);
   }
 
-  onActionChange(value) {
+  onActionChange(value) { 
     console.log('Writer changed...');
     console.log(value);
-    if(value === 'Continue operating a current account') {
-      this.showDownloadRefLetter = true;
+    console.log(this.selectedValue);
+    if(value == 1) {
+      this.showAccountContinueForm = true;
+      this.showAccountClosureForm = false;
     }
-    else {
-      this.showDownloadRefLetter = false;
+    else if(value == 2){
+      this.showAccountClosureForm = true;
+      this.showAccountContinueForm = false;
     }
-
     //this.filteredBooks = this.bookService.getBooksByWriter(this.writer.value.wid);
   }
+
+  onOptionChange(event){
+    console.log('event', event.target.defaultValue);
+    if(event.target.defaultValue == 'yes'){
+      this.showAccountContinueForm = false;
+      this.showAccountClosureForm = false;
+    }else if(event.target.defaultValue == 'no'){
+      this.showAccountContinueForm = true;
+    }
+  }
+
 }

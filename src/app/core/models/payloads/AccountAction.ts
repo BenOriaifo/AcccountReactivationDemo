@@ -1,13 +1,13 @@
 export interface IAction {
-    value: string;
+    value: number;
     viewValue: string;
   }
 
 export const _acctAction : IAction[]  = [
     {
-        value: 'view1', viewValue: 'Continue operating a current account'
+        value: 1, viewValue: 'Continue operating a current account'
     },
     {
-        value: 'view2', viewValue: 'Close existing account and open a savings account'
+        value: 2, viewValue: 'Close existing account and open a savings account'
     }
 ]
