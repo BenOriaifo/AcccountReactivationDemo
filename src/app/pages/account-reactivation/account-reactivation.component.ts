@@ -77,6 +77,8 @@ export class AccountReactivationComponent implements OnInit {
   savingAccountModal: TemplateRef<any>;
   @ViewChild('personalAccountModal', { static: true })
   personalAccountModal: TemplateRef<any>;
+  isCorporateAccount = false;
+  isIndividualAccount = false;
   isAccountDormant = true;
   isAccountCorporateAndDormant = true;
   idDocExtension: string;
@@ -179,7 +181,7 @@ export class AccountReactivationComponent implements OnInit {
       pickUpBranchCtrl: [''],
       fileInputCtrl: ['', Validators.required],
       utililtyBillCtrl: [''],
-      signature: ['', Validators.required],
+      // signature: ['', Validators.required],
     });
 
     this.accountClosureFormGroup = this.formBuilder.group({
@@ -1319,6 +1321,7 @@ export class AccountReactivationComponent implements OnInit {
       this.showAccountClosureForm = false;
     }else if(event.target.defaultValue == 'no'){
       this.showAccountContinueForm = true;
+      this.showAccountClosureForm = false;
     }
   }
 
