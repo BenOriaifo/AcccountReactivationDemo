@@ -107,7 +107,7 @@
 				<!-- remember to add the ngclass here -->
 				<!-- [ngClass]="{ disabled: isAwaitingResponse }"
 					[disabled]="isAwaitingResponse" -->
-				<button mat-flat-button class="big-buttonStyles" (click)="closeTermsAndOpenAction()"
+				<button mat-flat-button class="big-buttonStyles" (click)="validateAccountDetails(stepper)"
 					[ngClass]="{ disabled: accountFormGroup.invalid }" [disabled]="accountFormGroup.invalid">
 					Reactivate Your Account
 				</button>
