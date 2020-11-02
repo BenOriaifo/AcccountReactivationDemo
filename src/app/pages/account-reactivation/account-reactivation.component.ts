@@ -77,6 +77,8 @@ export class AccountReactivationComponent implements OnInit {
   savingAccountModal: TemplateRef<any>;
   @ViewChild('personalAccountModal', { static: true })
   personalAccountModal: TemplateRef<any>;
+  isCorporateAccount = false;
+  isIndividualAccount = false;
   isAccountDormant = true;
   isAccountCorporateAndDormant = true;
   idDocExtension: string;
@@ -177,9 +179,10 @@ export class AccountReactivationComponent implements OnInit {
       identificationIDCtrl: ['', Validators.required],
       debitCardNameCtrl: ['', Validators.pattern(/^[a-zA-Z\s]*$/)],
       pickUpBranchCtrl: [''],
-      fileInputCtrl: ['', Validators.required],
+      fileInputCtrl: [''],
       utililtyBillCtrl: [''],
-      signature: ['', Validators.required],
+      signature: [''],
+      IntroLetterFileName: ''
     });
 
     this.accountClosureFormGroup = this.formBuilder.group({
@@ -511,12 +514,15 @@ export class AccountReactivationComponent implements OnInit {
                 panelClass: ['errorSnackbar'],
               }
             );
-            this.isDetailFormActive = true;
+            
             stepper.next();
           } else {
             // remove comment
             this.showInformationModal();
           }
+          // this.isDetailFormActive = true;
+          // this.isIndividualAccount = true;
+          // this.closeTermsAndOpenAction();
         } else {
           this._snackBar.open(resp.ResponseDescription, 'Ok', {
             verticalPosition: 'top',
@@ -547,6 +553,9 @@ export class AccountReactivationComponent implements OnInit {
 
     this.informationModalRef.afterClosed().subscribe((result) => {
       console.log(result);
+      this.isDetailFormActive = true;
+      this.isIndividualAccount = true;
+      this.closeTermsAndOpenAction();
       this.isIAgreeChecked = false;
     });
   }
@@ -742,7 +751,10 @@ export class AccountReactivationComponent implements OnInit {
       this.signatureFile = '';
       this.accountDetailsFormGroup.setValue({ signature: '' });
     }
-    if (fileName === 'IntroLetter') {
+    if (fileName === 'IntroLetter' && this.isIndividualAccount == true) {
+      this.IntroLetterFileName = '';
+      this.accountDetailsFormGroup.controls.IntroLetter.setValue('');
+    }else{
       this.IntroLetterFileName = '';
       this.corporateAccountDetailsForm.controls.IntroLetter.setValue('');
     }
@@ -952,9 +964,15 @@ export class AccountReactivationComponent implements OnInit {
       const extension = event.target.files[0].name.split('.');
       this.introFileExt = extension[extension.length - 1];
       this.IntroLetterFileName = event.target.value.substring(12);
-      this.corporateAccountDetailsForm.controls.IntroLetter.setValue(
-        this.IntroLetterFileName
-      );
+      if(this.isIndividualAccount == true){
+        this.accountDetailsFormGroup.controls.IntroLetter.setValue(
+          this.IntroLetterFileName
+        );
+      }else{
+        this.corporateAccountDetailsForm.controls.IntroLetter.setValue(
+          this.IntroLetterFileName
+        );
+      }
       this._snackBar.open(
         'Instruction Letter has been uploaded successfully',
         'OK',
@@ -1319,6 +1337,7 @@ export class AccountReactivationComponent implements OnInit {
       this.showAccountClosureForm = false;
     }else if(event.target.defaultValue == 'no'){
       this.showAccountContinueForm = true;
+      this.showAccountClosureForm = false;
     }
   }
 
