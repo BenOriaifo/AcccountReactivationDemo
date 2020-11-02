@@ -9,7 +9,8 @@ import { throwError as observableThrowError, Observable } from "rxjs";
 export class AccountReactivationService {
 
   constructor(private http: HttpClient) { }
-  apiUrl = 'https://localhost:44314';
+  //apiUrl = 'https://localhost:44314';
+  //apiUrl = 'https://sibtc-azure-external-api.stanbicibtc-devase.p.azurewebsites.net';
 
   /*requestInitiation(body){
     let data = JSON.stringify(body)
