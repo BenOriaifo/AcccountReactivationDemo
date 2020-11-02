@@ -361,6 +361,17 @@ export class AccountReactivationComponent implements OnInit {
     stepper.next();
   }
 
+  validateBVNAndProceedToUploads(stepper: MatStepper) {
+    // this.isRequirementActive = false;
+    // this.isRequirementDone = true;
+    let isSuccess = this.confirmBVNIsValid();
+    if (isSuccess) {
+      this.isAccountStepperActive = true;
+      this.isAccountStepperDone = false;
+      stepper.next();
+    }
+  }
+
   proceedToSignatureUpload(stepper: MatStepper) {
     this.isAccountStepperActive = true;
     this.isAccountStepperDone = false;
@@ -1203,14 +1214,19 @@ export class AccountReactivationComponent implements OnInit {
     this.initiateOTP(stepper);
     this.onSubmitDocumentsFormGroup(stepper);
   }
-  async confirmRequest(stepper) {
+
+  confirmBVNIsValid():boolean {
     try {
-      await this.validateBVN(stepper);
+      let isSuccess = this.validateBVN();
+      if (isSuccess == true) {
+        return true;
+      }
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
   }
-  validateBVN(stepper) {
+
+  validateBVN(): boolean {
     const payload = {
       bvn: this.bvn.toString(),
       accountNumber: this.acctNo,
@@ -1229,9 +1245,10 @@ export class AccountReactivationComponent implements OnInit {
             panelClass: ['errorSnackbar'],
           });
           this.isDetailFormActive = false;
+          return true;
 
-          this.initiateOTP(stepper);
-          this.buildPersonalAcctRequestDocs();
+          // this.initiateOTP(stepper);
+          // this.buildPersonalAcctRequestDocs();
         } else {
           this._snackBar.open(response.ResponseDescription, 'Failed', {
             verticalPosition: 'top',
@@ -1240,10 +1257,8 @@ export class AccountReactivationComponent implements OnInit {
             panelClass: ['errorSnackbar'],
           });
           this.isSendingFileToUpload = false;
-          return;
         }
-      },
-      (err) => {
+      }, (err) => {
         this.detailFormSpinner = false;
         this.isSendingFileToUpload = false;
         this._snackBar.open('Error occured', 'Error', {
@@ -1252,8 +1267,8 @@ export class AccountReactivationComponent implements OnInit {
           duration: 5000,
           panelClass: ['errorSnackbar'],
         });
-      }
-    );
+      });
+    return false;
   }
   buildPersonalAcctRequestDocs() {
     const documents: UploadedDocument = {

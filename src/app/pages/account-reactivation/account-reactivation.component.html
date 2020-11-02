@@ -408,7 +408,7 @@
 						text-transform: uppercase;
 					" [ngClass]="{ disabled: validateStepper() }" mat-button [disabled]="validateStepper()"
 					(click)="proceedToAccountValidation(stepper)">
-					Save and Contiune
+					Save and continue
 					</button>
 				</div>
 				</form>
@@ -509,118 +509,117 @@
 									<p>NB: Funds would be transfered to your savings account</p>
 									<p><b>Saving Account Form</b></p>
 									<div>
-									<div class="w-100">
+										<div class="w-100">
+											<mat-form-field class="w-100">
+												<mat-label>Preferred Pick up branch</mat-label>
+												<mat-select matNativeControl placeholder="Please select a pick up branch" formControlName="branchName">
+													<mat-option (click)="onSelect(opt)" *ngFor="let opt of bankList" [value]="opt.Branch_Name">
+														{{ opt.Branch_Name }}
+													</mat-option>
+												</mat-select>
+											</mat-form-field>
+										</div>
+										<div class="w-100">
+											<mat-form-field class="w-100">
+											<mat-label>NOK Details</mat-label>
+											<input matInput autocomplete="off" formControlName="nokDetails" placeholder="Enter Nok Details" type="text" required />
+											<mat-error> Enter Nok Details </mat-error>
+											</mat-form-field>
+										</div>
+										<div class="w-100">
 										<mat-form-field class="w-100">
-											<mat-label>Preferred Pick up branch</mat-label>
-											<mat-select matNativeControl placeholder="Please select a pick up branch" formControlName="branchName">
-												<mat-option (click)="onSelect(opt)" *ngFor="let opt of bankList" [value]="opt.Branch_Name">
-													{{ opt.Branch_Name }}
-												</mat-option>
+											<mat-label>NOK Fullname</mat-label>
+											<input matInput autocomplete="off" formControlName="nokFullName" placeholder="Enter Nok Fullname" type="text" required />
+											<mat-error> Enter Nok Details </mat-error>
+										</mat-form-field>
+										</div>
+										<div class="w-100">
+										<mat-form-field class="w-100">
+											<mat-label>Date of Birth</mat-label>
+											<input matInput autocomplete="off" formControlName="dateOfBirth" type="date" required />
+											<mat-error> Valid date of birth </mat-error>
+										</mat-form-field>
+										</div>
+										<div class="w-100">
+										<mat-form-field class="w-100">
+											<mat-label>Address</mat-label>
+											<input matInput autocomplete="off" formControlName="address" placeholder="Address" type="text" required />
+											<mat-error>Address</mat-error>
+										</mat-form-field>
+										</div>
+										<div class="w-100">
+										<mat-form-field class="w-100">
+											<mat-label>Phone Number</mat-label>
+											<input matInput autocomplete="off" formControlName="phoneNumber" placeholder="Enter Phone Number" type="text" required />
+											<mat-error> Enter Phone Number </mat-error>
+										</mat-form-field>
+										</div>
+										<div class="w-100">
+										<mat-form-field class="w-100">
+											<mat-label>Email Address</mat-label>
+											<input matInput autocomplete="off" formControlName="emailAddress" placeholder="Enter Email Address" type="email" required />
+											<mat-error> Enter Email Address </mat-error>
+										</mat-form-field>
+										</div>
+										<div class="w-100">
+										<mat-form-field>
+											<mat-label>Gender</mat-label>
+											<mat-select matNativeControl formControlName="gender" placeholder="Please select gender">
+												<mat-option value="male">Male</mat-option>
+												<mat-option value="female">Female</mat-option>
 											</mat-select>
 										</mat-form-field>
-									</div>
-									<div class="w-100">
-										<mat-form-field class="w-100">
-										<mat-label>NOK Details</mat-label>
-										<input matInput autocomplete="off" formControlName="nokDetails" placeholder="Enter Nok Details" type="text" required />
-										<mat-error> Enter Nok Details </mat-error>
+										</div>
+										<div class="w-100">
+										<mat-form-field>
+											<mat-label>Employment Status</mat-label>
+											<mat-select matNativeControl formControlName="employmentStatus" placeholder="Please select employment status">
+												<mat-option value="Employed">Employed</mat-option>
+												<mat-option value="Unemployed">Unemployed</mat-option>
+											</mat-select>
 										</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field class="w-100">
-										<mat-label>NOK Fullname</mat-label>
-										<input matInput autocomplete="off" formControlName="nokFullName" placeholder="Enter Nok Fullname" type="text" required />
-										<mat-error> Enter Nok Details </mat-error>
-									</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field class="w-100">
-										<mat-label>Date of Birth</mat-label>
-										<input matInput autocomplete="off" formControlName="dateOfBirth" type="date" required />
-										<mat-error> Valid date of birth </mat-error>
-									</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field class="w-100">
-										<mat-label>Address</mat-label>
-										<input matInput autocomplete="off" formControlName="address" placeholder="Address" type="text" required />
-										<mat-error>Address</mat-error>
-									</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field class="w-100">
-										<mat-label>Phone Number</mat-label>
-										<input matInput autocomplete="off" formControlName="phoneNumber" placeholder="Enter Phone Number" type="text" required />
-										<mat-error> Enter Phone Number </mat-error>
-									</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field class="w-100">
-										<mat-label>Email Address</mat-label>
-										<input matInput autocomplete="off" formControlName="emailAddress" placeholder="Enter Email Address" type="email" required />
-										<mat-error> Enter Email Address </mat-error>
-									</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field>
-										<mat-label>Gender</mat-label>
-										<mat-select matNativeControl formControlName="gender" placeholder="Please select gender">
-											<mat-option value="male">Male</mat-option>
-											<mat-option value="female">Female</mat-option>
-										</mat-select>
-									</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field>
-										<mat-label>Employment Status</mat-label>
-										<mat-select matNativeControl formControlName="employmentStatus" placeholder="Please select employment status">
-											<mat-option value="Employed">Employed</mat-option>
-											<mat-option value="Unemployed">Unemployed</mat-option>
-										</mat-select>
-									</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field>
-										<mat-label>Select occupation</mat-label>
-										<mat-select matNativeControl formControlName="occupation" placeholder="Please select occupation">
-											<mat-option value="Developer">Developer</mat-option>
-											<mat-option value="Banker">Banker</mat-option>
-										</mat-select>
-									</mat-form-field>
-									</div>
-									<div class="w-100">
-									<mat-form-field>
-										<mat-label>Income</mat-label>
-										<mat-select matNativeControl formControlName="income" placeholder="Please select Income">
-											<mat-option value="Income">Income</mat-option>
-											<mat-option value="Banker">Banker</mat-option>
-										</mat-select>
-									</mat-form-field>
-									</div>
-									<div style="text-align: center" class="center-div">
-										<button style="
-											margin-right: 20px !important;
-											background-color: rgba(3, 150, 253, 0.16);
-											text-transform: uppercase;
-											color: #0396fd;
-											width: 40% !important;
-											height: 50px;
-											" mat-button matStepperPrevious>
-											Back
-										</button>
-										<button style="
-											color: #ffffff;
-											background-color: #113998;
-											width: 40% !important;
-											height: 50 px;
-											text-transform: uppercase;" 
-											[ngClass]="accountClosureFormGroup.invalid ? 'required-input' : 'valid-input'"
-											mat-button (click)="moveToStepper(stepper)">
-											Save and contiune
-										</button>
-									</div>
+										</div>
+										<div class="w-100">
+										<mat-form-field>
+											<mat-label>Select occupation</mat-label>
+											<mat-select matNativeControl formControlName="occupation" placeholder="Please select occupation">
+												<mat-option value="Developer">Developer</mat-option>
+												<mat-option value="Banker">Banker</mat-option>
+											</mat-select>
+										</mat-form-field>
+										</div>
+										<div class="w-100">
+										<mat-form-field>
+											<mat-label>Income</mat-label>
+											<mat-select matNativeControl formControlName="income" placeholder="Please select Income">
+												<mat-option value="Income">Income</mat-option>
+												<mat-option value="Banker">Banker</mat-option>
+											</mat-select>
+										</mat-form-field>
+										</div>
 									</div>
 								</form>
+								<div style="text-align: center" class="center-div">
+									<button style="
+										margin-right: 20px !important;
+										background-color: rgba(3, 150, 253, 0.16);
+										text-transform: uppercase;
+										color: #0396fd;
+										width: 40% !important;
+										height: 50px;
+										" mat-button matStepperPrevious>
+										Back
+									</button>
+									<button style="
+										color: #ffffff;
+										background-color: #113998;
+										width: 40% !important;
+										height: 50 px;
+										text-transform: uppercase;" [ngClass]="accountClosureFormGroup.invalid ? 'required-input' : 'valid-input'"
+										mat-button (click)="validateBVNAndProceedToUploads(stepper)">
+										Save and continue
+									</button>
+								</div>
 							</div>
 							<!--Continue Operating a current account-->
 							<!--<div *ngIf="savings == 'no'">-->
@@ -1283,8 +1282,8 @@
 										height: 50 px;
 										text-transform: uppercase;" 
 										[ngClass]="accountDetailsFormGroup.invalid ? 'required-input' : 'valid-input'"
-										mat-button (click)="moveToStepper(stepper)">
-										Save and contiune
+										mat-button (click)="validateBVNAndProceedToUploads(stepper)">
+										Save and continue
 									</button>
 								</div>
 							</div>
@@ -1401,7 +1400,7 @@
 						text-transform: uppercase;" 
 						[ngClass]="{ disabled: corporateAccountDetailsForm.invalid }" mat-button
 						(click)="proceedToAccountValidation(stepper)">
-						Save and Contiune
+						Save and continue
 					</button>
 					</div>
 				</form>
@@ -1629,7 +1628,7 @@
 					text-transform: uppercase;"
 					
 					(click)="proceedToSignatureUpload(stepper)">
-					Save and Contiune
+					Save and continue
 					<!-- [ngClass]="{ disabled: corporateAccountDetailsForm.invalid }" mat-button
 					[disabled]="corporateAccountDetailsForm.invalid" -->
 				</button>
@@ -1691,7 +1690,7 @@
 					width: 40% !important;
 					height: 50 px;
 					text-transform: uppercase;" (click)="proceedToAccountValidation(stepper)">
-					Save and Contiune
+					Save and continue
 				</button>
 				</div>
 			</mat-step>
@@ -1717,7 +1716,7 @@
 				</div>
 				<button mat-flat-button class="big-buttonStyles" [ngClass]="{ primary: class == 'primary' }"
 					[disabled]="isAwaitingResponse" (click)="validateOTP(stepper)">
-					Save and Contiune
+					Save and continue
 				</button>
 				<!-- [disabled]="otpForm.invalid || showSpinner" -->
 				</form>
