@@ -13,7 +13,8 @@ export class AccountReactivationService {
     headers: HttpHeaders;
 
     constructor(settings: AppConfigService, private httpClient: HttpClient) {
-        this.apiBaseUrl = settings.AccountReactivationUrl;
+        // this.apiBaseUrl = settings.AccountReactivationUrl;
+        this.apiBaseUrl = 'https://localhost:44314';
         this.headers = new HttpHeaders({ 'X-Stack-Eb': 'xvbTHDUUJILMxsqwoppdjjxZSxQpvk' });
 
     }

@@ -179,9 +179,10 @@ export class AccountReactivationComponent implements OnInit {
       identificationIDCtrl: ['', Validators.required],
       debitCardNameCtrl: ['', Validators.pattern(/^[a-zA-Z\s]*$/)],
       pickUpBranchCtrl: [''],
-      fileInputCtrl: ['', Validators.required],
+      fileInputCtrl: [''],
       utililtyBillCtrl: [''],
-      // signature: ['', Validators.required],
+      signature: [''],
+      IntroLetterFileName: ''
     });
 
     this.accountClosureFormGroup = this.formBuilder.group({
@@ -360,6 +361,17 @@ export class AccountReactivationComponent implements OnInit {
     stepper.next();
   }
 
+  validateBVNAndProceedToUploads(stepper: MatStepper) {
+    // this.isRequirementActive = false;
+    // this.isRequirementDone = true;
+    let isSuccess = this.confirmBVNIsValid();
+    if (isSuccess) {
+      this.isAccountStepperActive = true;
+      this.isAccountStepperDone = false;
+      stepper.next();
+    }
+  }
+
   proceedToSignatureUpload(stepper: MatStepper) {
     this.isAccountStepperActive = true;
     this.isAccountStepperDone = false;
@@ -513,12 +525,15 @@ export class AccountReactivationComponent implements OnInit {
                 panelClass: ['errorSnackbar'],
               }
             );
-            this.isDetailFormActive = true;
+            
             stepper.next();
           } else {
             // remove comment
             this.showInformationModal();
           }
+          // this.isDetailFormActive = true;
+          // this.isIndividualAccount = true;
+          // this.closeTermsAndOpenAction();
         } else {
           this._snackBar.open(resp.ResponseDescription, 'Ok', {
             verticalPosition: 'top',
@@ -549,6 +564,9 @@ export class AccountReactivationComponent implements OnInit {
 
     this.informationModalRef.afterClosed().subscribe((result) => {
       console.log(result);
+      this.isDetailFormActive = true;
+      this.isIndividualAccount = true;
+      this.closeTermsAndOpenAction();
       this.isIAgreeChecked = false;
     });
   }
@@ -744,7 +762,10 @@ export class AccountReactivationComponent implements OnInit {
       this.signatureFile = '';
       this.accountDetailsFormGroup.setValue({ signature: '' });
     }
-    if (fileName === 'IntroLetter') {
+    if (fileName === 'IntroLetter' && this.isIndividualAccount == true) {
+      this.IntroLetterFileName = '';
+      this.accountDetailsFormGroup.controls.IntroLetter.setValue('');
+    }else{
       this.IntroLetterFileName = '';
       this.corporateAccountDetailsForm.controls.IntroLetter.setValue('');
     }
@@ -954,9 +975,15 @@ export class AccountReactivationComponent implements OnInit {
       const extension = event.target.files[0].name.split('.');
       this.introFileExt = extension[extension.length - 1];
       this.IntroLetterFileName = event.target.value.substring(12);
-      this.corporateAccountDetailsForm.controls.IntroLetter.setValue(
-        this.IntroLetterFileName
-      );
+      if(this.isIndividualAccount == true){
+        this.accountDetailsFormGroup.controls.IntroLetter.setValue(
+          this.IntroLetterFileName
+        );
+      }else{
+        this.corporateAccountDetailsForm.controls.IntroLetter.setValue(
+          this.IntroLetterFileName
+        );
+      }
       this._snackBar.open(
         'Instruction Letter has been uploaded successfully',
         'OK',
@@ -1187,14 +1214,19 @@ export class AccountReactivationComponent implements OnInit {
     this.initiateOTP(stepper);
     this.onSubmitDocumentsFormGroup(stepper);
   }
-  async confirmRequest(stepper) {
+
+  confirmBVNIsValid():boolean {
     try {
-      await this.validateBVN(stepper);
+      let isSuccess = this.validateBVN();
+      if (isSuccess == true) {
+        return true;
+      }
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
   }
-  validateBVN(stepper) {
+
+  validateBVN(): boolean {
     const payload = {
       bvn: this.bvn.toString(),
       accountNumber: this.acctNo,
@@ -1213,9 +1245,10 @@ export class AccountReactivationComponent implements OnInit {
             panelClass: ['errorSnackbar'],
           });
           this.isDetailFormActive = false;
+          return true;
 
-          this.initiateOTP(stepper);
-          this.buildPersonalAcctRequestDocs();
+          // this.initiateOTP(stepper);
+          // this.buildPersonalAcctRequestDocs();
         } else {
           this._snackBar.open(response.ResponseDescription, 'Failed', {
             verticalPosition: 'top',
@@ -1224,10 +1257,8 @@ export class AccountReactivationComponent implements OnInit {
             panelClass: ['errorSnackbar'],
           });
           this.isSendingFileToUpload = false;
-          return;
         }
-      },
-      (err) => {
+      }, (err) => {
         this.detailFormSpinner = false;
         this.isSendingFileToUpload = false;
         this._snackBar.open('Error occured', 'Error', {
@@ -1236,8 +1267,8 @@ export class AccountReactivationComponent implements OnInit {
           duration: 5000,
           panelClass: ['errorSnackbar'],
         });
-      }
-    );
+      });
+    return false;
   }
   buildPersonalAcctRequestDocs() {
     const documents: UploadedDocument = {
