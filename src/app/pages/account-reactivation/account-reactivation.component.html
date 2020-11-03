@@ -1589,12 +1589,12 @@
 					<h4>Please upload either a reference form or introduction letter:</h4>
 
 					<div class="align-left upload-cont" style="padding: 13px !important">
-					<label for="file-upload" class="custom-file-upload" (click)="utilityInput.click()">Choose File
+					<label for="file-upload" class="custom-file-upload" (click)="IntroLetter.click()">Choose File
 					</label>
 
 					<input hidden accept="image/jpg,image/png,image/jpeg,application/pdf"
-						(change)="onFileSelected($event, 'IntroLetter')" #utilityInput type="file"
-						formContolName="reference" id="file" />
+						(change)="onFileSelected($event, 'IntroLetter')" #IntroLetter type="file"
+						formContolName="IntroLetter" id="file" />
 					</div>
 					<div *ngIf="IntroLetterFileName" class="selected-file">
 					<label class="file-text" for="">

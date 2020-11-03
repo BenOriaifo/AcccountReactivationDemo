@@ -14,7 +14,8 @@ export class AccountReactivationService {
 
     constructor(settings: AppConfigService, private httpClient: HttpClient) {
         // this.apiBaseUrl = settings.AccountReactivationUrl;
-        this.apiBaseUrl = 'https://sibtc-azure-external-api.stanbicibtc-devase.p.azurewebsites.net';
+        //this.apiBaseUrl = 'https://sibtc-azure-external-api.stanbicibtc-devase.p.azurewebsites.net';
+        this.apiBaseUrl = 'https://localhost:44314/';
         this.headers = new HttpHeaders({ 'X-Stack-Eb': 'xvbTHDUUJILMxsqwoppdjjxZSxQpvk' });
 
     }

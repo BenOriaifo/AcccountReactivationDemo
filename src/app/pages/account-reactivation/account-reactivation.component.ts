@@ -182,7 +182,7 @@ export class AccountReactivationComponent implements OnInit {
       fileInputCtrl: [''],
       utililtyBillCtrl: [''],
       signature: [''],
-      IntroLetterFileName: ''
+      IntroLetter: ''
     });
 
     this.accountClosureFormGroup = this.formBuilder.group({
@@ -365,11 +365,9 @@ export class AccountReactivationComponent implements OnInit {
     // this.isRequirementActive = false;
     // this.isRequirementDone = true;
     let isSuccess = this.confirmBVNIsValid();
-    if (isSuccess) {
       this.isAccountStepperActive = true;
       this.isAccountStepperDone = false;
       stepper.next();
-    }
   }
 
   proceedToSignatureUpload(stepper: MatStepper) {
@@ -1245,8 +1243,8 @@ export class AccountReactivationComponent implements OnInit {
             panelClass: ['errorSnackbar'],
           });
           this.isDetailFormActive = false;
+          // stepper.next();
           return true;
-
           // this.initiateOTP(stepper);
           // this.buildPersonalAcctRequestDocs();
         } else {
